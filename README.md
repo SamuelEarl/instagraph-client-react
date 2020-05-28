@@ -1,5 +1,7 @@
 # What is this repo?
-This is a sample social media web app, called Instagraph, written with React and Dgraph. It is a rewrite the Vuegram app found here [The Definitive Guide to Getting Started with Vue.js](https://savvyapps.com/blog/definitive-guide-building-web-app-vuejs-firebase).
+This is a sample social media web app, called Instagraph, written with React and [Dgraph](https://dgraph.io/).
+
+This app is a rewrite of the Vuegram app found here [The Definitive Guide to Getting Started with Vue.js](https://savvyapps.com/blog/definitive-guide-building-web-app-vuejs-firebase).
 
 ---
 
