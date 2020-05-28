@@ -10,7 +10,7 @@ const RegisterForm = (props) => {
 
   const handleRegister = (e) => {
     e.preventDefault();
-    console.log("Registered", firstName, lastName, email, password);
+    console.log("Registered", firstName.trim(), lastName.trim(), email.trim(), password.trim());
     return "Registered";
   }
 

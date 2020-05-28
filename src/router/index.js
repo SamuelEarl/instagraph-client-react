@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import Layout from '@/layouts/Layout';
 import Auth from '@/pages/auth/Auth';
 import Dashboard from '@/pages/Dashboard';
-import Settings from '@/pages/Settings';
+import Profile from '@/pages/Profile';
 
 const Router = () => {
   return (
@@ -16,7 +16,7 @@ const Router = () => {
         <Route exact path='/login' component={Auth} />
         <Layout>
           <Route exact path='/dashboard' component={Dashboard} />
-          <Route exact path='/settings' component={Settings} />
+          <Route exact path='/profile' component={Profile} />
         </Layout>
       </Switch>
     </BrowserRouter>

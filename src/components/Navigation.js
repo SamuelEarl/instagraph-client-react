@@ -19,8 +19,8 @@ const Navigation = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/settings" exact activeClassName={styles.active}>
-                Settings
+              <NavLink to="/profile" exact activeClassName={styles.active}>
+                Profile
               </NavLink>
             </li>
             <li>

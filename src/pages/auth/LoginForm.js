@@ -8,7 +8,7 @@ const LoginForm = (props) => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    console.log("Log In", email, password);
+    console.log("Log In", email.trim(), password.trim());
     return "Logged in";
   }
 

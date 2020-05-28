@@ -7,7 +7,7 @@ const ForgotPasswordForm = (props) => {
 
   const handleForgotPassword = (e) => {
     e.preventDefault();
-    console.log("Forgot Password", email);
+    console.log("Forgot Password", email.trim());
     return "Forgot password";
   }
 
