@@ -1,0 +1,58 @@
+import React, { useState } from 'react';
+import Button from '@/components/Button';
+import styles from "./RegisterForm.module.scss";
+
+const RegisterForm = (props) => {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+    console.log("Registered", firstName, lastName, email, password);
+    return "Registered";
+  }
+
+  return (
+    <form onSubmit={handleRegister}>
+      <h1 className="authHeader">Get Started</h1>
+
+      <input
+        type="text"
+        placeholder="First Name"
+        value={firstName}
+        onChange={e => setFirstName(e.target.value)}
+      />
+
+      <input
+        type="text"
+        placeholder="Last Name"
+        value={lastName}
+        onChange={e => setLastName(e.target.value)}
+      />
+
+      <input
+        type="text"
+        placeholder="Email"
+        value={email}
+        onChange={e => setEmail(e.target.value)}
+      />
+
+      <input
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={e => setPassword(e.target.value)}
+      />
+
+      <Button>Sign Up</Button>
+
+      <div className="switchForm">
+        <p onClick={() => props.setSelectedForm('loginForm')}>Back to Log In</p>
+      </div>
+    </form>
+  );
+};
+
+export default RegisterForm;

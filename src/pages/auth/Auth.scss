@@ -1,0 +1,30 @@
+@import "@/assets/scss/variables.scss";
+
+@media #{$xs-up} {
+  .authHeader {
+    margin-bottom: 20px;
+  }
+
+  .authContent {
+    margin-bottom: 20px;
+  }
+
+  .switchForm {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+
+    p {
+      color: $primary;
+      cursor: pointer;
+    }
+  }
+}
+
+@media #{$m-up} {
+
+}
+
+@media #{$xl-up} {
+
+}

@@ -1,0 +1,60 @@
+@import "@/assets/scss/variables.scss";
+
+@media #{$xs-up} {
+  .auth {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .leftCol {
+      flex: 1;
+      padding: 20px;
+      background-color: $primary;
+      color: $white;
+
+      a {
+        color: $white;
+        text-decoration: none;
+        border-bottom: 1px dotted $white;
+        &:hover {
+          border-bottom: none;
+        }
+      }
+    }
+
+    .rightCol {
+      flex: 2;
+      padding: 20px;
+      background-color: $white;
+    }
+  }
+}
+
+@media #{$m-up} {
+
+}
+
+@media #{$xl-up} {
+  .auth {
+    flex-direction: row;
+
+    .leftCol {
+      flex: 1;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .rightCol {
+      flex: 1;
+      display: flex;
+      justify-content: flex-start;
+    }
+
+    .container {
+      width: 70%;
+      align-self: center;
+      padding: 40px;
+    }
+  }
+}
