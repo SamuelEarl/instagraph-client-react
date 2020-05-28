@@ -1,0 +1,23 @@
+@import "@/assets/scss/variables.scss";
+
+@media #{$xs-up} {
+  .layout {
+
+    .main {
+      padding: 20px 10px;
+    }
+  }
+}
+
+@media #{$m-up} {
+
+}
+
+@media #{$xl-up} {
+  .layout {
+
+    .main {
+      padding: 20px 0;
+    }
+  }
+}

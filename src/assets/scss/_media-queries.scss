@@ -1,0 +1,71 @@
+// This will contain the variables or mixins for your breakpoints.
+
+// ===============================================
+// Media Query Ranges
+// ===============================================
+// x-small: 0px - 600px | Extra small devices (phones, 600px and smaller)
+// small  : 601px - 767px | Small devices (portrait tablets and large phones, 601px and larger)
+// medium : 768px - 992px | Medium devices (landscape tablets, 768px and larger)
+// large  : 993px - 1199px | Large devices (laptops/desktops, 993px and larger)
+// x-large: 1200px and larger | Extra large devices (large laptops and desktops, 1200px and larger)
+
+// -------------------------------------------------------------------
+// For reference, here are the viewport sizes of some common devices:
+// -------------------------------------------------------------------
+// * iPhone 8: 375px wide x 667px high (x-small range)
+// * iPad (in portrait mode): 768px wide x 1024px high (medium range)
+// * iPad Pro (in portrait mode): 1024px wide x 1366px high (large range)
+// * Macbook Pro 15": 1440px wide x 900px high (x-large range)
+
+
+$xs-up: "(min-width: 0px)";
+$xs-only: "(min-width: 0px) and (max-width: 600px)";
+// Usage example:
+// @media #{$xs-up} {
+//   .page {
+//     padding: 20px;
+//   }
+// }
+
+
+$s-up: "(min-width: 601px)";
+$s-only: "(min-width: 601px) and (max-width: 767px)";
+// Usage example:
+// @media #{$s-up} {
+//   .page {
+//     padding: 20px;
+//   }
+// }
+
+
+$m-up: "(min-width: 768px)";
+$m-only: "(min-width: 768px) and (max-width: 992px)";
+// Usage example:
+// @media #{$m-up} {
+//   .page {
+//     padding: 20px;
+//   }
+// }
+
+
+$l-up: "(min-width: 993px)";
+$l-only: "(min-width: 993px) and (max-width: 1199px)";
+// Usage example:
+// @media #{$l-up} {
+//   .page {
+//     padding: 20px;
+//   }
+// }
+
+
+$xl-up: "(min-width: 1200px)";
+// Usage example:
+// @media #{$xl-up} {
+//   .page {
+//     padding: 20px;
+//   }
+// }
+// NOTE: Technically speaking, this should be $xl-only instead of $xl-up because there is no media
+// query above x-large. But since the styles in this project use the $xs-up and $m-up media
+// queries (instead of $xs-only and $m-only), I wanted to stay consistent with the syntax used by
+// those media queries.

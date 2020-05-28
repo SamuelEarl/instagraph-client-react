@@ -1,0 +1,33 @@
+@import "@/assets/scss/variables.scss";
+
+@media #{$xs-up} {
+  *, *:before, *:after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    color: $dark;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 15px;
+  }
+}
+
+@media #{$m-up} {
+
+}
+
+@media #{$xl-up} {
+  .container {
+    width: 65%; // Contain the width so the content doesn't spread out to the edges.
+  }
+}

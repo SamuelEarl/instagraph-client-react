@@ -1,0 +1,38 @@
+@import "@/assets/scss/variables.scss";
+
+@media #{$xs-up} {
+  .button {
+    background: $primary;
+    border: 0;
+    outline: 0;
+    color: $white;
+    padding: 0.8rem 1rem;
+    min-width: 150px;
+    font-size: 16px;
+    border-radius: 3px;
+    cursor: pointer;
+
+    &:hover {
+      background: lighten($primary, 5%);
+    }
+    &:disabled {
+      opacity: 0.5;
+
+      &:hover {
+        background: $primary;
+      }
+    }
+  }
+
+  .fullWidth {
+    width: 100%;
+  }
+}
+
+@media #{$m-up} {
+
+}
+
+@media #{$xl-up} {
+
+}

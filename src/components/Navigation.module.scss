@@ -1,0 +1,70 @@
+@import "@/assets/scss/variables.scss";
+
+@media #{$xs-up} {
+  header {
+    // display: flex;
+    // flex-direction: column;
+    padding: 25px 10px;
+    background-color: $white;
+    box-shadow: 0 0 5px 0 rgba($dark, 0.5);
+    z-index: 10;
+
+    div { // .container div
+      display: flex;
+      flex-direction: column;
+
+      .navLeft {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+
+        a {
+          text-decoration: none;
+          color: $primary;
+
+          h3 {
+            font-size: 1.6rem;
+          }
+        }
+      }
+
+      .navRight ul {
+        display: flex;
+        justify-content: space-around;
+        list-style-type: none;
+
+        a {
+          text-decoration: none;
+          color: $primary;
+        }
+      }
+    }
+  }
+}
+
+@media #{$m-up} {
+
+}
+
+@media #{$xl-up} {
+  header {
+    padding: 25px 0;
+
+    div { // .container div
+      flex-direction: row;
+      justify-content: space-between;
+
+      .navLeft {
+        margin-bottom: 0;
+      }
+
+      .navRight {
+        flex: 0.5;
+
+        ul {
+          justify-content: space-around;
+        }
+      }
+    }
+  }
+}
