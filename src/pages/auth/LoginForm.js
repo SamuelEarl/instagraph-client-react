@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Button from '@/components/Button';
-import styles from "./LoginForm.module.scss";
 
 const LoginForm = (props) => {
   const [email, setEmail] = useState('');

@@ -69,13 +69,13 @@ const Dashboard = () => {
           <p>{post.content}</p>
           <ul>
             <li>
-              <a onClick={() => openCommentModal(post)}>Comments {post.comments.length}</a>
+              <p onClick={() => openCommentModal(post)}>Comments {post.comments.length}</p>
             </li>
             <li>
-              <a onClick={() => likePost(post.id, post.likes)}>Likes {post.likes}</a>
+              <p onClick={() => likePost(post.id, post.likes)}>Likes {post.likes}</p>
             </li>
             <li>
-              <a onClick={() => viewPost(post)}>View full post</a>
+              <p onClick={() => viewPost(post)}>View full post</p>
             </li>
           </ul>
         </div>

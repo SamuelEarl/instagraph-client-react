@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Button from '@/components/Button';
-import styles from "./RegisterForm.module.scss";
 
 const RegisterForm = (props) => {
   const [firstName, setFirstName] = useState('');

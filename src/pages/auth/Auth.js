@@ -29,7 +29,7 @@ const Auth = () => {
         <div className={styles.container}>
           <h1 className="authHeader">Instagraph</h1>
           <p className="authContent">Welcome to the Instagraph sample social media web app powered by React.js, GraphQL and Dgraph.</p>
-          <p className="authContent">Build this project by following <a href="https://dzone.com/articles/" target="_blank">Dgraph: The Perfect Database for Front-end Developers</a>.</p>
+          <p className="authContent">Build this project by following <a href="https://dzone.com/articles/" target="_blank" rel="noopener noreferrer">Dgraph: The Perfect Database for Front-end Developers</a>.</p>
         </div>
       </div>
       <div className={styles.rightCol}>

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Button from '@/components/Button';
-import styles from "./ForgotPasswordForm.module.scss";
 
 const ForgotPasswordForm = (props) => {
   const [email, setEmail] = useState('');
