@@ -5,6 +5,10 @@ This app is a rewrite of the Vuegram app found here: [The Definitive Guide to Ge
 
 ---
 
+# How to run this app
+
+---
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
