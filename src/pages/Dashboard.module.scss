@@ -26,7 +26,12 @@
     }
 
     .rightCol {
+      height: 100%;
       border: 1px solid $light-gray;
+
+      .noPosts {
+        padding: 20px;
+      }
 
       .post {
         padding: 20px;

@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
+import { formatDate } from '@/utils';
 import Button from '@/components/Button';
+import CommentModal from '@/components/CommentModal';
+import PostModal from '@/components/PostModal';
 import styles from "./Dashboard.module.scss";
 
 // const postsArray = [];
@@ -8,14 +11,15 @@ const postsArray = [
     id: "1",
     firstName: "John",
     lastName: "Doe",
-    createdAt: "Some time",
+    createdAt: Date.now(),
     content: "Content string...",
     comments: [
       {
+        id: "1",
         firstName: "James",
         lastName: "Dole",
-        createdAt: "comment time",
-        content: "Comment goes here...",
+        createdAt: Date.now(),
+        content: "This is a comment...",
       }
     ],
     likes: 2
@@ -24,13 +28,48 @@ const postsArray = [
     id: "2",
     firstName: "John",
     lastName: "Doe",
-    createdAt: "Some time",
+    createdAt: Date.now(),
+    content: "Another content string...",
+    comments: [
+      {
+        id: "2",
+        firstName: "Jane",
+        lastName: "Doe",
+        createdAt: Date.now(),
+        content: "Another comment goes here...",
+      }
+    ],
+    likes: 1
+  },
+  {
+    id: "3",
+    firstName: "John",
+    lastName: "Doe",
+    createdAt: Date.now(),
     content: "Content string...",
     comments: [
       {
+        id: "3",
         firstName: "James",
         lastName: "Dole",
-        createdAt: "comment time",
+        createdAt: Date.now(),
+        content: "Comment goes here...",
+      }
+    ],
+    likes: 1
+  },
+  {
+    id: "4",
+    firstName: "John",
+    lastName: "Doe",
+    createdAt: Date.now(),
+    content: "Content string...",
+    comments: [
+      {
+        id: "4",
+        firstName: "James",
+        lastName: "Dole",
+        createdAt: Date.now(),
         content: "Comment goes here...",
       }
     ],
@@ -39,24 +78,42 @@ const postsArray = [
 ];
 
 const Dashboard = () => {
-  const [post, setPost] = useState('');
+  const [createAPost, setCreateAPost] = useState('');
+  const [showCommentModal, setShowCommentModal] = useState(false);
+  const [showPostModal, setShowPostModal] = useState(false);
+  const [postToView, setPostToView] = useState('');
 
   const handleCreatePost = (e) => {
     e.preventDefault();
-    console.log("Create Post:", post.trim());
+    console.log("Create Post:", createAPost.trim());
     return "Posted!";
   }
 
-  const openCommentModal = () => {
-    console.log("openCommentModal");
+  const openPostModal = (showModal, post) => {
+    setShowPostModal(showModal);
+    setPostToView(post);
+  }
+
+  let displayPostModal;
+  if (showPostModal) {
+    displayPostModal = (<PostModal post={postToView} setShowModal={setShowPostModal} />);
+    // displayPostModal = (<p>NEW POST</p>);
+    // console.log("displayPostModal:", displayPostModal);
+  }
+  else {
+    displayPostModal = null;
+  }
+
+  let displayCommentModal;
+  if (showCommentModal) {
+    displayCommentModal = (<CommentModal setShowModal={setShowCommentModal} />);
+  }
+  else {
+    displayCommentModal = null;
   }
 
   const likePost = () => {
     console.log("likePost");
-  }
-
-  const viewPost = () => {
-    console.log("viewPost");
   }
 
   let displayPosts;
@@ -65,17 +122,17 @@ const Dashboard = () => {
       return (
         <div className={styles.post} key={post.id}>
           <h4>{post.firstName} {post.lastName}</h4>
-          <span>{post.createdAt}</span>
+          <span>{formatDate(post.createdAt)}</span>
           <p>{post.content}</p>
           <ul>
             <li>
-              <p onClick={() => openCommentModal(post)}>Comments {post.comments.length}</p>
+              <p onClick={() => setShowCommentModal(true)}>Comments {post.comments.length}</p>
             </li>
             <li>
               <p onClick={() => likePost(post.id, post.likes)}>Likes {post.likes}</p>
             </li>
             <li>
-              <p onClick={() => viewPost(post)}>View full post</p>
+              <p onClick={() => openPostModal(true, post)}>View full post</p>
             </li>
           </ul>
         </div>
@@ -83,11 +140,15 @@ const Dashboard = () => {
     });
   }
   else {
-    displayPosts = (<p>There are currently no posts.</p>);
+    displayPosts = (<p className={styles.noPosts}>There are currently no posts.</p>);
   }
 
   return (
     <div className={styles.dashboard}>
+
+      {displayCommentModal}
+      {displayPostModal}
+
       <div className={styles.leftCol}>
         <div className={styles.profile}>
           <h3>John Doe</h3>
@@ -95,8 +156,8 @@ const Dashboard = () => {
         <div className={styles.createPost}>
           <p>Create A Post</p>
           <form onSubmit={handleCreatePost}>
-            <textarea value={post} onChange={e => setPost(e.target.value)} />
-            <Button disabled={!post} size="fullWidth">Create Post</Button>
+            <textarea value={createAPost} onChange={e => setCreateAPost(e.target.value)} />
+            <Button disabled={!createAPost} size="fullWidth">Create Post</Button>
           </form>
         </div>
       </div>
