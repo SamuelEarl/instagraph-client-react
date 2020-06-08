@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { formatDate } from '@/utils';
+import { author, postsArray } from "@/dummy-data";
+import { formatDate, teaserText } from '@/utils';
 import Button from '@/components/Button';
 import CommentModal from '@/components/CommentModal';
 import PostModal from '@/components/PostModal';
 import styles from "./Dashboard.module.scss";
-import { postsArray } from "@/dummy-data";
 
 const Dashboard = () => {
   const [createAPost, setCreateAPost] = useState('');
@@ -52,7 +52,7 @@ const Dashboard = () => {
         <div className={styles.post} key={post.id}>
           <h4>{post.firstName} {post.lastName}</h4>
           <span className={styles.date}>{formatDate(post.createdAt)}</span>
-          <p>{post.content}</p>
+          <p>{teaserText(post.content)}</p>
           <ul>
             <li>
               <p onClick={() => setShowCommentModal(true)}>Comments {post.comments.length}</p>
@@ -80,7 +80,7 @@ const Dashboard = () => {
 
       <div className={styles.leftCol}>
         <div className={styles.profile}>
-          <h3>John Doe</h3>
+          <h3>{author.firstName} {author.lastName}</h3>
         </div>
         <div className={styles.createPost}>
           <p>Create A Post</p>

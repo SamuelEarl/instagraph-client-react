@@ -9,14 +9,22 @@
  * you convert a JavaScript date object into RFC 3339 format:
  * https://codetogo.io/how-to-create-date-in-rfc3339-format-in-javascript/.
  */
+
+export const author = {
+  firstName: "Ryan",
+  lastName: "Clark",
+  email: "ryan@example.com",
+  password: "password123"
+}
+
 // export const postsArray = [];
 export const postsArray = [
   {
     id: "1",
-    firstName: "John",
-    lastName: "Doe",
+    firstName: "Kade",
+    lastName: "Peterson",
     createdAt: (new Date()).toISOString(),
-    content: "Content string...",
+    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse efficitur tristique odio ac mattis. Duis augue nisi, consequat vitae nulla sed, gravida luctus odio. Etiam vitae placerat metus, at pulvinar orci. Quisque eu dui quis nibh interdum aliquet in in elit. Sed neque metus, vulputate id ante ac, laoreet gravida felis. Nunc turpis ante, posuere tempus commodo in, rutrum et mi. Duis nec urna vestibulum, suscipit elit vel, tincidunt metus. Aenean volutpat convallis risus nec ullamcorper. Proin tempus orci quis mi consequat, non commodo ante semper. Pellentesque quis nisl sapien. Ut eu ullamcorper ligula. Morbi finibus ante vel dolor lacinia interdum. Maecenas quis malesuada tortor.",
     likes: 2,
     comments: [
       {
@@ -24,61 +32,61 @@ export const postsArray = [
         firstName: "James",
         lastName: "Howard",
         createdAt: (new Date()).toISOString(),
-        content: "This is James' comment...",
+        content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse efficitur tristique odio ac mattis. Duis augue nisi, consequat vitae nulla sed, gravida luctus odio. Etiam vitae placerat metus, at pulvinar orci. Quisque eu dui quis nibh interdum aliquet in in elit. Sed neque metus, vulputate id ante ac, laoreet gravida felis. Nunc turpis ante, posuere tempus commodo in, rutrum et mi. Duis nec urna vestibulum, suscipit elit vel, tincidunt metus. Aenean volutpat convallis risus nec ullamcorper. Proin tempus orci quis mi consequat, non commodo ante semper. Pellentesque quis nisl sapien. Ut eu ullamcorper ligula. Morbi finibus ante vel dolor lacinia interdum. Maecenas quis malesuada tortor.",
       },
       {
         id: "2",
         firstName: "Bill",
         lastName: "Smith",
         createdAt: (new Date()).toISOString(),
-        content: "This is Bill's comment...",
+        content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse efficitur tristique odio ac mattis. Duis augue nisi, consequat vitae nulla sed, gravida luctus odio. Etiam vitae placerat metus, at pulvinar orci. Quisque eu dui quis nibh interdum aliquet in in elit. Sed neque metus, vulputate id ante ac, laoreet gravida felis. Nunc turpis ante, posuere tempus commodo in, rutrum et mi. Duis nec urna vestibulum, suscipit elit vel, tincidunt metus. Aenean volutpat convallis risus nec ullamcorper. Proin tempus orci quis mi consequat, non commodo ante semper. Pellentesque quis nisl sapien. Ut eu ullamcorper ligula. Morbi finibus ante vel dolor lacinia interdum. Maecenas quis malesuada tortor.",
       },
       {
         id: "3",
         firstName: "Mary",
         lastName: "Taylor",
         createdAt: (new Date()).toISOString(),
-        content: "This is Mary's comment...",
+        content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse efficitur tristique odio ac mattis. Duis augue nisi, consequat vitae nulla sed, gravida luctus odio. Etiam vitae placerat metus, at pulvinar orci. Quisque eu dui quis nibh interdum aliquet in in elit. Sed neque metus, vulputate id ante ac, laoreet gravida felis. Nunc turpis ante, posuere tempus commodo in, rutrum et mi. Duis nec urna vestibulum, suscipit elit vel, tincidunt metus. Aenean volutpat convallis risus nec ullamcorper. Proin tempus orci quis mi consequat, non commodo ante semper. Pellentesque quis nisl sapien. Ut eu ullamcorper ligula. Morbi finibus ante vel dolor lacinia interdum. Maecenas quis malesuada tortor.",
       },
       {
         id: "4",
         firstName: "Betty",
         lastName: "Johnson",
         createdAt: (new Date()).toISOString(),
-        content: "This is Betty's comment...",
+        content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse efficitur tristique odio ac mattis. Duis augue nisi, consequat vitae nulla sed, gravida luctus odio. Etiam vitae placerat metus, at pulvinar orci. Quisque eu dui quis nibh interdum aliquet in in elit. Sed neque metus, vulputate id ante ac, laoreet gravida felis. Nunc turpis ante, posuere tempus commodo in, rutrum et mi. Duis nec urna vestibulum, suscipit elit vel, tincidunt metus. Aenean volutpat convallis risus nec ullamcorper. Proin tempus orci quis mi consequat, non commodo ante semper. Pellentesque quis nisl sapien. Ut eu ullamcorper ligula. Morbi finibus ante vel dolor lacinia interdum. Maecenas quis malesuada tortor.",
       },
       {
         id: "5",
         firstName: "David",
         lastName: "Garrison",
         createdAt: (new Date()).toISOString(),
-        content: "This is David's comment...",
+        content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse efficitur tristique odio ac mattis. Duis augue nisi, consequat vitae nulla sed, gravida luctus odio. Etiam vitae placerat metus, at pulvinar orci. Quisque eu dui quis nibh interdum aliquet in in elit. Sed neque metus, vulputate id ante ac, laoreet gravida felis. Nunc turpis ante, posuere tempus commodo in, rutrum et mi. Duis nec urna vestibulum, suscipit elit vel, tincidunt metus. Aenean volutpat convallis risus nec ullamcorper. Proin tempus orci quis mi consequat, non commodo ante semper. Pellentesque quis nisl sapien. Ut eu ullamcorper ligula. Morbi finibus ante vel dolor lacinia interdum. Maecenas quis malesuada tortor.",
       }
     ]
   },
   {
     id: "2",
-    firstName: "John",
-    lastName: "Doe",
+    firstName: "Ronald",
+    lastName: "Jenkins",
     createdAt: (new Date()).toISOString(),
-    content: "Another content string...",
+    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse efficitur tristique odio ac mattis. Duis augue nisi, consequat vitae nulla sed, gravida luctus odio. Etiam vitae placerat metus, at pulvinar orci. Quisque eu dui quis nibh interdum aliquet in in elit. Sed neque metus, vulputate id ante ac, laoreet gravida felis. Nunc turpis ante, posuere tempus commodo in, rutrum et mi. Duis nec urna vestibulum, suscipit elit vel, tincidunt metus. Aenean volutpat convallis risus nec ullamcorper. Proin tempus orci quis mi consequat, non commodo ante semper. Pellentesque quis nisl sapien. Ut eu ullamcorper ligula. Morbi finibus ante vel dolor lacinia interdum. Maecenas quis malesuada tortor.",
     likes: 1,
     comments: [
       {
         id: "2",
         firstName: "Jane",
-        lastName: "Doe",
+        lastName: "Williams",
         createdAt: (new Date()).toISOString(),
-        content: "Another comment goes here...",
+        content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse efficitur tristique odio ac mattis. Duis augue nisi, consequat vitae nulla sed, gravida luctus odio. Etiam vitae placerat metus, at pulvinar orci. Quisque eu dui quis nibh interdum aliquet in in elit. Sed neque metus, vulputate id ante ac, laoreet gravida felis. Nunc turpis ante, posuere tempus commodo in, rutrum et mi. Duis nec urna vestibulum, suscipit elit vel, tincidunt metus. Aenean volutpat convallis risus nec ullamcorper. Proin tempus orci quis mi consequat, non commodo ante semper. Pellentesque quis nisl sapien. Ut eu ullamcorper ligula. Morbi finibus ante vel dolor lacinia interdum. Maecenas quis malesuada tortor.",
       }
     ]
   },
   {
     id: "3",
-    firstName: "John",
-    lastName: "Doe",
+    firstName: "Brad",
+    lastName: "West",
     createdAt: (new Date()).toISOString(),
-    content: "Content string...",
+    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse efficitur tristique odio ac mattis. Duis augue nisi, consequat vitae nulla sed, gravida luctus odio. Etiam vitae placerat metus, at pulvinar orci. Quisque eu dui quis nibh interdum aliquet in in elit. Sed neque metus, vulputate id ante ac, laoreet gravida felis. Nunc turpis ante, posuere tempus commodo in, rutrum et mi. Duis nec urna vestibulum, suscipit elit vel, tincidunt metus. Aenean volutpat convallis risus nec ullamcorper. Proin tempus orci quis mi consequat, non commodo ante semper. Pellentesque quis nisl sapien. Ut eu ullamcorper ligula. Morbi finibus ante vel dolor lacinia interdum. Maecenas quis malesuada tortor.",
     likes: 1,
     comments: [
       {
@@ -86,16 +94,16 @@ export const postsArray = [
         firstName: "James",
         lastName: "Howard",
         createdAt: (new Date()).toISOString(),
-        content: "Comment goes here...",
+        content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse efficitur tristique odio ac mattis. Duis augue nisi, consequat vitae nulla sed, gravida luctus odio. Etiam vitae placerat metus, at pulvinar orci. Quisque eu dui quis nibh interdum aliquet in in elit. Sed neque metus, vulputate id ante ac, laoreet gravida felis. Nunc turpis ante, posuere tempus commodo in, rutrum et mi. Duis nec urna vestibulum, suscipit elit vel, tincidunt metus. Aenean volutpat convallis risus nec ullamcorper. Proin tempus orci quis mi consequat, non commodo ante semper. Pellentesque quis nisl sapien. Ut eu ullamcorper ligula. Morbi finibus ante vel dolor lacinia interdum. Maecenas quis malesuada tortor.",
       }
     ]
   },
   {
     id: "4",
-    firstName: "John",
-    lastName: "Doe",
+    firstName: "Tom",
+    lastName: "Miller",
     createdAt: (new Date()).toISOString(),
-    content: "Content string...",
+    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse efficitur tristique odio ac mattis. Duis augue nisi, consequat vitae nulla sed, gravida luctus odio. Etiam vitae placerat metus, at pulvinar orci. Quisque eu dui quis nibh interdum aliquet in in elit. Sed neque metus, vulputate id ante ac, laoreet gravida felis. Nunc turpis ante, posuere tempus commodo in, rutrum et mi. Duis nec urna vestibulum, suscipit elit vel, tincidunt metus. Aenean volutpat convallis risus nec ullamcorper. Proin tempus orci quis mi consequat, non commodo ante semper. Pellentesque quis nisl sapien. Ut eu ullamcorper ligula. Morbi finibus ante vel dolor lacinia interdum. Maecenas quis malesuada tortor.",
     likes: 1,
     comments: [
       {
@@ -103,7 +111,7 @@ export const postsArray = [
         firstName: "James",
         lastName: "Howard",
         createdAt: (new Date()).toISOString(),
-        content: "Comment goes here...",
+        content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse efficitur tristique odio ac mattis. Duis augue nisi, consequat vitae nulla sed, gravida luctus odio. Etiam vitae placerat metus, at pulvinar orci. Quisque eu dui quis nibh interdum aliquet in in elit. Sed neque metus, vulputate id ante ac, laoreet gravida felis. Nunc turpis ante, posuere tempus commodo in, rutrum et mi. Duis nec urna vestibulum, suscipit elit vel, tincidunt metus. Aenean volutpat convallis risus nec ullamcorper. Proin tempus orci quis mi consequat, non commodo ante semper. Pellentesque quis nisl sapien. Ut eu ullamcorper ligula. Morbi finibus ante vel dolor lacinia interdum. Maecenas quis malesuada tortor.",
       }
     ]
   }
