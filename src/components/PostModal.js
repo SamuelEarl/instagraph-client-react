@@ -1,26 +1,27 @@
 import React from 'react';
 import { formatDate } from '@/utils';
+import './Modal.scss';
 import styles from './PostModal.module.scss';
 
 const PostModal = ({ post, setShowModal }) => {
   return (
-    <div className={styles.modal}>
-      <div className={styles.modalContent}>
-        <div className={styles.modalHeader}>
-          <p
-            className={styles.closeModal}
+    <div className="modal">
+      <div className="modalContent">
+        {/* <div className="modalHeader"> */}
+          <div
+            className="modalClose"
             onClick={() => setShowModal(false)}
           >
             &times;
-          </p>
-        </div>
+          </div>
+        {/* </div> */}
         <div className={styles.post}>
-          <h5>{post.firstName} {post.lastName}</h5>
-          <span>{formatDate(post.createdAt)}</span>
+          <h4>{post.firstName} {post.lastName}</h4>
+          <span className={styles.date}>{formatDate(post.createdAt)}</span>
           <p>{post.content}</p>
           <ul>
             <li>
-            <div>Comments {post.comments.length}</div>
+            <p>Comments {post.comments.length}</p>
             </li>
             <li>
               <p>Likes {post.likes}</p>
@@ -28,12 +29,13 @@ const PostModal = ({ post, setShowModal }) => {
           </ul>
         </div>
         <div className={styles.comments}>
+          <h4 className={styles.commentsHeading}>Comments</h4>
           {
             post.comments.map((comment) => {
               return (
                 <div className={styles.comment} key={comment.id}>
-                  <p>{comment.firstName} {comment.lastName}</p>
-                  <span>{formatDate(comment.createdAt)}</span>
+                  <h5>{comment.firstName} {comment.lastName}</h5>
+                  <span className={styles.date}>{formatDate(comment.createdAt)}</span>
                   <p>{comment.content}</p>
                 </div>
               );

@@ -1,33 +1,43 @@
 @import "@/assets/scss/variables.scss";
 
 @media #{$xs-up} {
-  .modal {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background: rgba($dark, 0.4);
-    z-index: 999;
+  .post, .comment {
+    padding: 20px;
+    border-bottom: 1px solid $light-gray;
+    &:last-child {
+      border-bottom: none;
+    }
 
-    .modalContent {
-      position: relative;
-      max-width: 600px;
-      margin: 30vh auto 0;
-      padding: 2rem;
-      border-radius: 3px;
-      background: $white;
-      box-shadow: 0 0 20px 0 rgba($dark, 0.5);
+    .date {
+      display: block;
+      font-style: italic;
+      font-size: 14px;
+      margin: 0.7rem 0;
+      color: darken($light-gray, 25%);
+    }
 
-      .modalHeader {
-        display: flex;
-        justify-content: flex-end;
+    ul {
+      list-style: none;
+      margin: 1rem 0 0 0;
+      padding: 0;
 
-        .closeModal {
-          font-size: 1.5rem;
-          cursor: pointer;
+      li {
+        display: inline-block;
+        margin-right: 1rem;
+        font-size: 14px;
+
+        p {
+          font-style: italic;
         }
       }
+    }
+  }
+
+  .comments {
+    margin-top: 20px;
+
+    .commentsHeading {
+      font-style: italic;
     }
   }
 }

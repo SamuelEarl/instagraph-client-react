@@ -4,78 +4,7 @@ import Button from '@/components/Button';
 import CommentModal from '@/components/CommentModal';
 import PostModal from '@/components/PostModal';
 import styles from "./Dashboard.module.scss";
-
-// const postsArray = [];
-const postsArray = [
-  {
-    id: "1",
-    firstName: "John",
-    lastName: "Doe",
-    createdAt: Date.now(),
-    content: "Content string...",
-    comments: [
-      {
-        id: "1",
-        firstName: "James",
-        lastName: "Dole",
-        createdAt: Date.now(),
-        content: "This is a comment...",
-      }
-    ],
-    likes: 2
-  },
-  {
-    id: "2",
-    firstName: "John",
-    lastName: "Doe",
-    createdAt: Date.now(),
-    content: "Another content string...",
-    comments: [
-      {
-        id: "2",
-        firstName: "Jane",
-        lastName: "Doe",
-        createdAt: Date.now(),
-        content: "Another comment goes here...",
-      }
-    ],
-    likes: 1
-  },
-  {
-    id: "3",
-    firstName: "John",
-    lastName: "Doe",
-    createdAt: Date.now(),
-    content: "Content string...",
-    comments: [
-      {
-        id: "3",
-        firstName: "James",
-        lastName: "Dole",
-        createdAt: Date.now(),
-        content: "Comment goes here...",
-      }
-    ],
-    likes: 1
-  },
-  {
-    id: "4",
-    firstName: "John",
-    lastName: "Doe",
-    createdAt: Date.now(),
-    content: "Content string...",
-    comments: [
-      {
-        id: "4",
-        firstName: "James",
-        lastName: "Dole",
-        createdAt: Date.now(),
-        content: "Comment goes here...",
-      }
-    ],
-    likes: 1
-  }
-];
+import { postsArray } from "@/dummy-data";
 
 const Dashboard = () => {
   const [createAPost, setCreateAPost] = useState('');
@@ -122,7 +51,7 @@ const Dashboard = () => {
       return (
         <div className={styles.post} key={post.id}>
           <h4>{post.firstName} {post.lastName}</h4>
-          <span>{formatDate(post.createdAt)}</span>
+          <span className={styles.date}>{formatDate(post.createdAt)}</span>
           <p>{post.content}</p>
           <ul>
             <li>

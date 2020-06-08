@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Button from '@/components/Button';
+import './Modal.scss';
 import styles from './CommentModal.module.scss';
 
 const CommentModal = (props) => {
@@ -12,19 +13,23 @@ const CommentModal = (props) => {
   }
 
   return (
-    <div className={styles.modal}>
-      <div className={styles.modalContent}>
-        <div className={styles.modalHeader}>
+    <div className="modal">
+      <div className="modalContent">
+        <div className="modalHeader">
           <p
-            className={styles.closeModal}
+            className="modalClose"
             onClick={() => props.setShowModal(false)}
           >
             &times;
           </p>
         </div>
-        <p>Add a comment</p>
+        <p className={styles.addCommentHeading}>Add a comment</p>
         <form onSubmit={handleSubmitComment}>
-          <textarea value={comment} onChange={e => setComment(e.target.value)} />
+          <textarea
+            className={styles.addCommentText}
+            value={comment}
+            onChange={e => setComment(e.target.value)}
+          />
           <Button disabled={!comment}>Add comment</Button>
         </form>
       </div>
