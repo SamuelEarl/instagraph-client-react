@@ -23,7 +23,7 @@ export const postsArray = [
     id: "1",
     firstName: "Kade",
     lastName: "Peterson",
-    createdAt: (new Date()).toISOString(),
+    createdAt: new Date().toISOString(),
     content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse efficitur tristique odio ac mattis. Duis augue nisi, consequat vitae nulla sed, gravida luctus odio. Etiam vitae placerat metus, at pulvinar orci. Quisque eu dui quis nibh interdum aliquet in in elit. Sed neque metus, vulputate id ante ac, laoreet gravida felis. Nunc turpis ante, posuere tempus commodo in, rutrum et mi. Duis nec urna vestibulum, suscipit elit vel, tincidunt metus. Aenean volutpat convallis risus nec ullamcorper. Proin tempus orci quis mi consequat, non commodo ante semper. Pellentesque quis nisl sapien. Ut eu ullamcorper ligula. Morbi finibus ante vel dolor lacinia interdum. Maecenas quis malesuada tortor.",
     likes: 2,
     comments: [
@@ -31,35 +31,35 @@ export const postsArray = [
         id: "1",
         firstName: "James",
         lastName: "Howard",
-        createdAt: (new Date()).toISOString(),
+        createdAt: new Date().toISOString(),
         content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse efficitur tristique odio ac mattis. Duis augue nisi, consequat vitae nulla sed, gravida luctus odio. Etiam vitae placerat metus, at pulvinar orci. Quisque eu dui quis nibh interdum aliquet in in elit. Sed neque metus, vulputate id ante ac, laoreet gravida felis. Nunc turpis ante, posuere tempus commodo in, rutrum et mi. Duis nec urna vestibulum, suscipit elit vel, tincidunt metus. Aenean volutpat convallis risus nec ullamcorper. Proin tempus orci quis mi consequat, non commodo ante semper. Pellentesque quis nisl sapien. Ut eu ullamcorper ligula. Morbi finibus ante vel dolor lacinia interdum. Maecenas quis malesuada tortor.",
       },
       {
         id: "2",
         firstName: "Bill",
         lastName: "Smith",
-        createdAt: (new Date()).toISOString(),
+        createdAt: new Date().toISOString(),
         content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse efficitur tristique odio ac mattis. Duis augue nisi, consequat vitae nulla sed, gravida luctus odio. Etiam vitae placerat metus, at pulvinar orci. Quisque eu dui quis nibh interdum aliquet in in elit. Sed neque metus, vulputate id ante ac, laoreet gravida felis. Nunc turpis ante, posuere tempus commodo in, rutrum et mi. Duis nec urna vestibulum, suscipit elit vel, tincidunt metus. Aenean volutpat convallis risus nec ullamcorper. Proin tempus orci quis mi consequat, non commodo ante semper. Pellentesque quis nisl sapien. Ut eu ullamcorper ligula. Morbi finibus ante vel dolor lacinia interdum. Maecenas quis malesuada tortor.",
       },
       {
         id: "3",
         firstName: "Mary",
         lastName: "Taylor",
-        createdAt: (new Date()).toISOString(),
+        createdAt: new Date().toISOString(),
         content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse efficitur tristique odio ac mattis. Duis augue nisi, consequat vitae nulla sed, gravida luctus odio. Etiam vitae placerat metus, at pulvinar orci. Quisque eu dui quis nibh interdum aliquet in in elit. Sed neque metus, vulputate id ante ac, laoreet gravida felis. Nunc turpis ante, posuere tempus commodo in, rutrum et mi. Duis nec urna vestibulum, suscipit elit vel, tincidunt metus. Aenean volutpat convallis risus nec ullamcorper. Proin tempus orci quis mi consequat, non commodo ante semper. Pellentesque quis nisl sapien. Ut eu ullamcorper ligula. Morbi finibus ante vel dolor lacinia interdum. Maecenas quis malesuada tortor.",
       },
       {
         id: "4",
         firstName: "Betty",
         lastName: "Johnson",
-        createdAt: (new Date()).toISOString(),
+        createdAt: new Date().toISOString(),
         content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse efficitur tristique odio ac mattis. Duis augue nisi, consequat vitae nulla sed, gravida luctus odio. Etiam vitae placerat metus, at pulvinar orci. Quisque eu dui quis nibh interdum aliquet in in elit. Sed neque metus, vulputate id ante ac, laoreet gravida felis. Nunc turpis ante, posuere tempus commodo in, rutrum et mi. Duis nec urna vestibulum, suscipit elit vel, tincidunt metus. Aenean volutpat convallis risus nec ullamcorper. Proin tempus orci quis mi consequat, non commodo ante semper. Pellentesque quis nisl sapien. Ut eu ullamcorper ligula. Morbi finibus ante vel dolor lacinia interdum. Maecenas quis malesuada tortor.",
       },
       {
         id: "5",
         firstName: "David",
         lastName: "Garrison",
-        createdAt: (new Date()).toISOString(),
+        createdAt: new Date().toISOString(),
         content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse efficitur tristique odio ac mattis. Duis augue nisi, consequat vitae nulla sed, gravida luctus odio. Etiam vitae placerat metus, at pulvinar orci. Quisque eu dui quis nibh interdum aliquet in in elit. Sed neque metus, vulputate id ante ac, laoreet gravida felis. Nunc turpis ante, posuere tempus commodo in, rutrum et mi. Duis nec urna vestibulum, suscipit elit vel, tincidunt metus. Aenean volutpat convallis risus nec ullamcorper. Proin tempus orci quis mi consequat, non commodo ante semper. Pellentesque quis nisl sapien. Ut eu ullamcorper ligula. Morbi finibus ante vel dolor lacinia interdum. Maecenas quis malesuada tortor.",
       }
     ]
@@ -68,7 +68,7 @@ export const postsArray = [
     id: "2",
     firstName: "Ronald",
     lastName: "Jenkins",
-    createdAt: (new Date()).toISOString(),
+    createdAt: new Date().toISOString(),
     content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse efficitur tristique odio ac mattis. Duis augue nisi, consequat vitae nulla sed, gravida luctus odio. Etiam vitae placerat metus, at pulvinar orci. Quisque eu dui quis nibh interdum aliquet in in elit. Sed neque metus, vulputate id ante ac, laoreet gravida felis. Nunc turpis ante, posuere tempus commodo in, rutrum et mi. Duis nec urna vestibulum, suscipit elit vel, tincidunt metus. Aenean volutpat convallis risus nec ullamcorper. Proin tempus orci quis mi consequat, non commodo ante semper. Pellentesque quis nisl sapien. Ut eu ullamcorper ligula. Morbi finibus ante vel dolor lacinia interdum. Maecenas quis malesuada tortor.",
     likes: 1,
     comments: [
@@ -76,7 +76,7 @@ export const postsArray = [
         id: "2",
         firstName: "Jane",
         lastName: "Williams",
-        createdAt: (new Date()).toISOString(),
+        createdAt: new Date().toISOString(),
         content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse efficitur tristique odio ac mattis. Duis augue nisi, consequat vitae nulla sed, gravida luctus odio. Etiam vitae placerat metus, at pulvinar orci. Quisque eu dui quis nibh interdum aliquet in in elit. Sed neque metus, vulputate id ante ac, laoreet gravida felis. Nunc turpis ante, posuere tempus commodo in, rutrum et mi. Duis nec urna vestibulum, suscipit elit vel, tincidunt metus. Aenean volutpat convallis risus nec ullamcorper. Proin tempus orci quis mi consequat, non commodo ante semper. Pellentesque quis nisl sapien. Ut eu ullamcorper ligula. Morbi finibus ante vel dolor lacinia interdum. Maecenas quis malesuada tortor.",
       }
     ]
@@ -85,7 +85,7 @@ export const postsArray = [
     id: "3",
     firstName: "Brad",
     lastName: "West",
-    createdAt: (new Date()).toISOString(),
+    createdAt: new Date().toISOString(),
     content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse efficitur tristique odio ac mattis. Duis augue nisi, consequat vitae nulla sed, gravida luctus odio. Etiam vitae placerat metus, at pulvinar orci. Quisque eu dui quis nibh interdum aliquet in in elit. Sed neque metus, vulputate id ante ac, laoreet gravida felis. Nunc turpis ante, posuere tempus commodo in, rutrum et mi. Duis nec urna vestibulum, suscipit elit vel, tincidunt metus. Aenean volutpat convallis risus nec ullamcorper. Proin tempus orci quis mi consequat, non commodo ante semper. Pellentesque quis nisl sapien. Ut eu ullamcorper ligula. Morbi finibus ante vel dolor lacinia interdum. Maecenas quis malesuada tortor.",
     likes: 1,
     comments: [
@@ -93,7 +93,7 @@ export const postsArray = [
         id: "3",
         firstName: "James",
         lastName: "Howard",
-        createdAt: (new Date()).toISOString(),
+        createdAt: new Date().toISOString(),
         content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse efficitur tristique odio ac mattis. Duis augue nisi, consequat vitae nulla sed, gravida luctus odio. Etiam vitae placerat metus, at pulvinar orci. Quisque eu dui quis nibh interdum aliquet in in elit. Sed neque metus, vulputate id ante ac, laoreet gravida felis. Nunc turpis ante, posuere tempus commodo in, rutrum et mi. Duis nec urna vestibulum, suscipit elit vel, tincidunt metus. Aenean volutpat convallis risus nec ullamcorper. Proin tempus orci quis mi consequat, non commodo ante semper. Pellentesque quis nisl sapien. Ut eu ullamcorper ligula. Morbi finibus ante vel dolor lacinia interdum. Maecenas quis malesuada tortor.",
       }
     ]
@@ -102,7 +102,7 @@ export const postsArray = [
     id: "4",
     firstName: "Tom",
     lastName: "Miller",
-    createdAt: (new Date()).toISOString(),
+    createdAt: new Date().toISOString(),
     content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse efficitur tristique odio ac mattis. Duis augue nisi, consequat vitae nulla sed, gravida luctus odio. Etiam vitae placerat metus, at pulvinar orci. Quisque eu dui quis nibh interdum aliquet in in elit. Sed neque metus, vulputate id ante ac, laoreet gravida felis. Nunc turpis ante, posuere tempus commodo in, rutrum et mi. Duis nec urna vestibulum, suscipit elit vel, tincidunt metus. Aenean volutpat convallis risus nec ullamcorper. Proin tempus orci quis mi consequat, non commodo ante semper. Pellentesque quis nisl sapien. Ut eu ullamcorper ligula. Morbi finibus ante vel dolor lacinia interdum. Maecenas quis malesuada tortor.",
     likes: 1,
     comments: [
@@ -110,7 +110,7 @@ export const postsArray = [
         id: "4",
         firstName: "James",
         lastName: "Howard",
-        createdAt: (new Date()).toISOString(),
+        createdAt: new Date().toISOString(),
         content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse efficitur tristique odio ac mattis. Duis augue nisi, consequat vitae nulla sed, gravida luctus odio. Etiam vitae placerat metus, at pulvinar orci. Quisque eu dui quis nibh interdum aliquet in in elit. Sed neque metus, vulputate id ante ac, laoreet gravida felis. Nunc turpis ante, posuere tempus commodo in, rutrum et mi. Duis nec urna vestibulum, suscipit elit vel, tincidunt metus. Aenean volutpat convallis risus nec ullamcorper. Proin tempus orci quis mi consequat, non commodo ante semper. Pellentesque quis nisl sapien. Ut eu ullamcorper ligula. Morbi finibus ante vel dolor lacinia interdum. Maecenas quis malesuada tortor.",
       }
     ]
