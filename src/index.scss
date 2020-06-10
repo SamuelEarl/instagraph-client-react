@@ -46,6 +46,14 @@
     padding: 10px;
     font-size: 16px;
   }
+
+  .error {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 3px;
+    background-color: palevioletred;
+    color: $white;
+  }
 }
 
 @media #{$m-up} {

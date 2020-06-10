@@ -1,5 +1,54 @@
 import { gql } from 'apollo-boost';
 
+export const SIGN_UP = gql`
+  mutation CreateAuthor($firstName: String!, $lastName: String!, $email: String!, $password: String!, $sessionId: String!) {
+    addAuthor(input: [
+      {
+        firstName: $firstName
+        lastName: $lastName
+        email: $email
+        password: $password
+        sessionId: $sessionId
+      }
+    ])
+    {
+      author {
+        id
+        firstName
+        lastName
+        email
+        password
+        sessionId
+      }
+    }
+  }
+`;
+
+
+export const LOG_IN = gql`
+  mutation UpdateAuthorSessionId($email: String!, $password: String!, $sessionId: String!) {
+    updateAuthor(input: {
+      filter: {
+        email: { eq: $email }
+        password: { eq: $password }
+      },
+      set: {
+        sessionId: $sessionId
+      }
+    })
+    {
+      author {
+        id
+        firstName
+        lastName
+        email
+        password
+        sessionId
+      }
+    }
+  }
+`;
+
 export const GET_AUTHOR = gql`
   query RetrieveAuthor($id: ID!) {
     getAuthor(id: $id) {

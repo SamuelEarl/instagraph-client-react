@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import { GET_AUTHOR, GET_ALL_POSTS } from '@/api/api';
-import { author, postsArray } from "@/dummy-data";
 import { formatDate, teaserText } from '@/utils';
 import Button from '@/components/Button';
 import CommentModal from '@/components/CommentModal';
@@ -13,7 +12,6 @@ const Dashboard = () => {
   const [showCommentModal, setShowCommentModal] = useState(false);
   const [showPostModal, setShowPostModal] = useState(false);
   const [postToView, setPostToView] = useState('');
-
 
   const getAuthor = useQuery(GET_AUTHOR, {
     variables: { id: '0x4e4b' }

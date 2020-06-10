@@ -1,26 +1,27 @@
 import React, { useState } from 'react';
 import LoginForm from './LoginForm';
-import RegisterForm from './RegisterForm';
+import SignUpForm from './SignUpForm';
 import ForgotPasswordForm from './ForgotPasswordForm';
 import PasswordResetSuccess from './PasswordResetSuccess';
 import styles from "./Auth.module.scss";
 import "./Auth.scss";
 
-const Auth = () => {
+const Auth = (props) => {
+  console.log("AUTH PROPS:", props);
   const [selectedForm, setSelectedForm] = useState('loginForm');
   let displayForm;
 
   if (selectedForm === 'loginForm') {
-    displayForm = <LoginForm setSelectedForm={setSelectedForm} />;
+    displayForm = <LoginForm setSelectedForm={setSelectedForm} history={props.history} />;
   }
-  if (selectedForm === 'registerForm') {
-    displayForm = <RegisterForm setSelectedForm={setSelectedForm} />;
+  if (selectedForm === 'signUpForm') {
+    displayForm = <SignUpForm setSelectedForm={setSelectedForm} history={props.history} />;
   }
   if (selectedForm === 'forgotPasswordForm') {
-    displayForm = <ForgotPasswordForm setSelectedForm={setSelectedForm} />;
+    displayForm = <ForgotPasswordForm setSelectedForm={setSelectedForm} history={props.history} />;
   }
   if (selectedForm === 'passwordResetSuccess') {
-    displayForm = <PasswordResetSuccess />;
+    displayForm = <PasswordResetSuccess history={props.history} />;
   }
 
   return (
