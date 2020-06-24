@@ -1,8 +1,33 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { useQuery, useMutation } from '@apollo/react-hooks';
+import { LOG_OUT } from '@/graphql/api';
+import { NavLink, withRouter } from 'react-router-dom';
 import styles from "./Navigation.module.scss";
 
-const Navigation = () => {
+const Navigation = (props) => {
+
+  const [logoutMutation, logoutStatus] = useMutation(LOG_OUT);
+
+  const handleLogout = async (e) => {
+    const id = "0x7537";
+    try {
+      await logoutMutation({
+        variables: {
+          id: id, // I need to get the Author ID from Apollo Client.
+        }
+      });
+
+      console.log("User logged out");
+
+      // React Router's `history` object is available through the `withRouter` HOC.
+      // After successful logout, redirect user to the login page.
+      props.history.push('/login');
+    }
+    catch(err) {
+      console.error("LOG OUT ERROR:", err.message);
+    }
+  }
+
   return (
     <header className={styles.header}>
       <div className="container">
@@ -23,15 +48,18 @@ const Navigation = () => {
                 Profile
               </NavLink>
             </li>
-            <li>
+            {/* <li>
               <NavLink to="/login" exact activeClassName={styles.active}>
                 Login
               </NavLink>
-            </li>
+            </li> */}
             <li>
-              <NavLink to="/logout" exact activeClassName={styles.active}>
+              <button className={styles.navButton} onClick={() => handleLogout()}>
                 Logout
-              </NavLink>
+              </button>
+              {/* <NavLink to="/logout" exact activeClassName={styles.active}>
+                Logout
+              </NavLink> */}
             </li>
           </ul>
         </nav>
@@ -40,4 +68,4 @@ const Navigation = () => {
   );
 };
 
-export default Navigation;
+export default withRouter(Navigation);

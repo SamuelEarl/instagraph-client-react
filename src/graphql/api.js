@@ -49,6 +49,29 @@ export const LOG_IN = gql`
   }
 `;
 
+export const LOG_OUT = gql`
+  mutation ClearAuthorSessionId($id: ID!) {
+    updateAuthor(input: {
+      filter: {
+        id: [$id]
+      },
+      set: {
+        sessionId: ""
+      }
+    })
+    {
+      author {
+        id
+        firstName
+        lastName
+        email
+        password
+        sessionId
+      }
+    }
+  }
+`;
+
 export const GET_AUTHOR = gql`
   query RetrieveAuthor($id: ID!) {
     getAuthor(id: $id) {

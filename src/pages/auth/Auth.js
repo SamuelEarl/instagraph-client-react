@@ -12,16 +12,16 @@ const Auth = (props) => {
   let displayForm;
 
   if (selectedForm === 'loginForm') {
-    displayForm = <LoginForm setSelectedForm={setSelectedForm} history={props.history} />;
+    displayForm = <LoginForm setSelectedForm={setSelectedForm} />;
   }
   if (selectedForm === 'signUpForm') {
-    displayForm = <SignUpForm setSelectedForm={setSelectedForm} history={props.history} />;
+    displayForm = <SignUpForm setSelectedForm={setSelectedForm} />;
   }
   if (selectedForm === 'forgotPasswordForm') {
-    displayForm = <ForgotPasswordForm setSelectedForm={setSelectedForm} history={props.history} />;
+    displayForm = <ForgotPasswordForm setSelectedForm={setSelectedForm} />;
   }
   if (selectedForm === 'passwordResetSuccess') {
-    displayForm = <PasswordResetSuccess history={props.history} />;
+    displayForm = <PasswordResetSuccess />;
   }
 
   return (

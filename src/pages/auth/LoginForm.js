@@ -1,14 +1,47 @@
 import React, { useState } from 'react';
+import { useQuery, useMutation } from '@apollo/react-hooks';
+import { LOG_IN } from '@/graphql/api';
+import { withRouter } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid';
 import Button from '@/components/Button';
 
 const LoginForm = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [loginMutation, loginStatus] = useMutation(LOG_IN);
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-    console.log("Log In", email.trim(), password.trim());
-    return "Logged in";
+  const handleLogin = async (e) => {
+    try {
+      e.preventDefault();
+      const user = await loginMutation({
+        variables: {
+          email: email.trim(),
+          password: password.trim(),
+          sessionId: uuidv4(), // The sessionId should be generated on the server. I will take care of that when I refactor the code to use custom resolvers.
+        }
+      });
+      // Reset the input fields back to their original values.
+      setEmail('');
+      setPassword('');
+      setError('');
+
+      // Store user object from response in ApolloClient's local app state.
+      // code goes here...
+      console.log("LOGGED IN USER:", user);
+
+      // After successful login, redirect user to the "Dashboard" page.
+      props.history.push('/dashboard');
+    }
+    catch(err) {
+      if (err.message === `GraphQL error: couldn't rewrite query for mutation addAuthor because id ${email.trim()} already exists for type Author`) {
+        setError(`A user with the email "${email.trim()}" already exists. Please use a different email.`);
+      }
+      else {
+        setError(err.message);
+      }
+      console.error("LOGIN ERROR:", err.message);
+    }
   }
 
   return (
@@ -39,4 +72,4 @@ const LoginForm = (props) => {
   );
 };
 
-export default LoginForm;
+export default withRouter(LoginForm);

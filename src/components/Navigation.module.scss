@@ -35,6 +35,15 @@
           text-decoration: none;
           color: $primary;
         }
+
+        .navButton {
+          border: none;
+          font-size: 1rem;
+          background-color: transparent;
+          text-decoration: none;
+          color: $primary;
+          cursor: pointer;
+        }
       }
     }
   }

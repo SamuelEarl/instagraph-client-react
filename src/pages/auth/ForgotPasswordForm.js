@@ -23,7 +23,7 @@ const ForgotPasswordForm = (props) => {
           onChange={e => setEmail(e.target.value)}
         />
 
-        <Button>Submit</Button>
+        <Button size="fullWidth">Submit</Button>
 
         <div className="switchForm">
           <p onClick={() => props.setSelectedForm('loginForm')}>Back to Log In</p>

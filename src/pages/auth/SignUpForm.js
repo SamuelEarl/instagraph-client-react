@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useQuery, useMutation } from '@apollo/react-hooks';
-import { v4 as uuidv4 } from 'uuid';
 import { SIGN_UP } from '@/graphql/api';
+import { v4 as uuidv4 } from 'uuid';
 import Button from '@/components/Button';
 
 const SignUpForm = (props) => {
@@ -21,7 +21,7 @@ const SignUpForm = (props) => {
           lastName: lastName.trim(),
           email: email.trim(),
           password: password.trim(),
-          sessionId: uuidv4(),
+          sessionId: '',
         }
       });
       // Reset the input fields back to their original values.
@@ -31,16 +31,18 @@ const SignUpForm = (props) => {
       setPassword('');
       setError('');
 
-      // Store user object from response in ApolloClient's local app state.
-      // code goes here...
-      console.log("USER:", user);
+      console.log("SIGNED UP USER:", user);
 
-      // After successful sign up, redirect user to the dashboard page.
-      props.history.push('/dashboard');
+      // After successful sign up, redirect user to the "verification email sent" page.
+      // I won't show how to do this in this tutorial, but you can try this on your own.
+      // props.history.push('/verification-email-sent');
     }
     catch(err) {
       if (err.message === `GraphQL error: couldn't rewrite query for mutation addAuthor because id ${email.trim()} already exists for type Author`) {
         setError(`A user with the email "${email.trim()}" already exists. Please use a different email.`);
+      }
+      else {
+        setError(err.message);
       }
       console.error("SIGN UP ERROR:", err.message);
     }
@@ -55,7 +57,7 @@ const SignUpForm = (props) => {
           lastName: lastName.trim(),
           email: email.trim(),
           password: password.trim(),
-          sessionId: uuidv4(),
+          sessionId: '',
         }
       });
       // Reset the input fields back to their original values.
@@ -65,16 +67,17 @@ const SignUpForm = (props) => {
       setPassword('');
       setError('');
 
-      // Store user object from response in ApolloClient's local app state.
-      // code goes here...
       console.log("TEST USER:", testUser);
 
-      // After successful sign up, redirect user to the dashboard page.
-      // props.history.push('/dashboard');
+      // After successful sign up, redirect user to the login page.
+      props.setSelectedForm('loginForm');
     }
     catch(err) {
       if (err.message === `GraphQL error: couldn't rewrite query for mutation addAuthor because id ${email.trim()} already exists for type Author`) {
         setError(`A user with the email "${email.trim()}" already exists. Please use a different email.`);
+      }
+      else {
+        setError(err.message);
       }
       console.error("CREATE TEST USER ERROR:", err.message);
     }
@@ -118,7 +121,7 @@ const SignUpForm = (props) => {
       </form>
 
         <br />
-        <button size="fullWidth" onClick={() => handleCreateTestUser()}>Create Test User</button>
+        <button onClick={() => handleCreateTestUser()}>Create Test User</button>
 
         <div className="switchForm">
           <p onClick={() => props.setSelectedForm('loginForm')}>Back to Log In</p>
