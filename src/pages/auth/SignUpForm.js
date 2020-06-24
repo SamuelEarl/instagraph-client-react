@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Button from '@/components/Button';
 
-const RegisterForm = (props) => {
+const SignUpForm = (props) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -45,7 +45,7 @@ const RegisterForm = (props) => {
         onChange={e => setPassword(e.target.value)}
       />
 
-      <Button>Sign Up</Button>
+      <Button size="fullWidth">Sign Up</Button>
 
       <div className="switchForm">
         <p onClick={() => props.setSelectedForm('loginForm')}>Back to Log In</p>
@@ -54,4 +54,4 @@ const RegisterForm = (props) => {
   );
 };
 
-export default RegisterForm;
+export default SignUpForm;

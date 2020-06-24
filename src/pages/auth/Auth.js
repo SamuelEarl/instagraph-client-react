@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import LoginForm from './LoginForm';
-import RegisterForm from './RegisterForm';
+import SignUpForm from './SignUpForm';
 import ForgotPasswordForm from './ForgotPasswordForm';
 import PasswordResetSuccess from './PasswordResetSuccess';
 import styles from "./Auth.module.scss";
@@ -13,8 +13,8 @@ const Auth = () => {
   if (selectedForm === 'loginForm') {
     displayForm = <LoginForm setSelectedForm={setSelectedForm} />;
   }
-  if (selectedForm === 'registerForm') {
-    displayForm = <RegisterForm setSelectedForm={setSelectedForm} />;
+  if (selectedForm === 'signUpForm') {
+    displayForm = <SignUpForm setSelectedForm={setSelectedForm} />;
   }
   if (selectedForm === 'forgotPasswordForm') {
     displayForm = <ForgotPasswordForm setSelectedForm={setSelectedForm} />;

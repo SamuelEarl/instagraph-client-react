@@ -32,7 +32,7 @@ const LoginForm = (props) => {
       <Button size="fullWidth">Log In</Button>
 
       <div className="switchForm">
-        <p onClick={() => props.setSelectedForm('registerForm')}>Create an Account</p>
+        <p onClick={() => props.setSelectedForm('signUpForm')}>Create an Account</p>
         <p onClick={() => props.setSelectedForm('forgotPasswordForm')}>Forgot Password</p>
       </div>
     </form>
