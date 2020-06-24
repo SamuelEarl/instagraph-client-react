@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useQuery, useMutation } from '@apollo/react-hooks';
-import { GET_AUTHOR, GET_ALL_POSTS } from '@/api/api';
+import { GET_AUTHOR, GET_ALL_POSTS } from '@/graphql/api';
 import { formatDate, teaserText } from '@/utils';
 import Button from '@/components/Button';
 import CommentModal from '@/components/CommentModal';
