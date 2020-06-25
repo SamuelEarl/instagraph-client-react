@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ApolloClient from 'apollo-boost';
-import { ApolloProvider } from '@apollo/react-hooks';
+import { createClient, Provider } from 'urql';
+// import ApolloClient from 'apollo-boost';
+// import { ApolloProvider } from '@apollo/react-hooks';
 import 'typeface-open-sans';
 import { schema } from '@/graphql/schema';
 import { resolvers } from '@/graphql/resolvers';
@@ -10,21 +11,32 @@ import Router from './router';
 import './index.scss';
 import * as serviceWorker from './serviceWorker';
 
-const client = new ApolloClient({
-  // cache,
-  uri: 'http://localhost:8080/graphql',
-  schema,
-  resolvers
-});
+// const client = new ApolloClient({
+//   // cache,
+//   uri: 'http://localhost:8080/graphql',
+//   schema,
+//   resolvers
+// });
 // cache.writeData({
 //   data: defaultState
 // });
 
+const client = createClient({
+  url: 'http://localhost:8080/graphql',
+  // Optional fetch options: https://formidable.com/open-source/urql/docs/basics/getting-started/
+  // fetchOptions: () => {
+  //   const token = getToken();
+  //   return {
+  //     headers: { authorization: token ? `Bearer ${token}` : '' },
+  //   };
+  // },
+});
+
 ReactDOM.render(
   <React.StrictMode>
-    <ApolloProvider client={client}>
+    <Provider value={client}>
       <Router />
-    </ApolloProvider>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

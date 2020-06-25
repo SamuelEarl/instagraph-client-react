@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useQuery, useMutation } from '@apollo/react-hooks';
+import { useQuery, useMutation } from 'urql';
 import { LOG_IN } from '@/graphql/api';
 import { withRouter } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
@@ -9,17 +9,15 @@ const LoginForm = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [loginMutation, loginStatus] = useMutation(LOG_IN);
+  const [loginResult, login] = useMutation(LOG_IN);
 
   const handleLogin = async (e) => {
     try {
       e.preventDefault();
-      const user = await loginMutation({
-        variables: {
-          email: email.trim(),
-          password: password.trim(),
-          sessionId: uuidv4(), // The sessionId should be generated on the server. I will take care of that when I refactor the code to use custom resolvers.
-        }
+      const user = await login({
+        email: email.trim(),
+        password: password.trim(),
+        sessionId: uuidv4(), // The sessionId should be generated on the server. I will take care of that when I refactor the code to use custom resolvers.
       });
       // Reset the input fields back to their original values.
       setEmail('');
@@ -30,16 +28,15 @@ const LoginForm = (props) => {
       // code goes here...
       console.log("LOGGED IN USER:", user);
 
+      if (user.error) {
+        throw Error(user.error);
+      }
+
       // After successful login, redirect user to the "Dashboard" page.
       props.history.push('/dashboard');
     }
     catch(err) {
-      if (err.message === `GraphQL error: couldn't rewrite query for mutation addAuthor because id ${email.trim()} already exists for type Author`) {
-        setError(`A user with the email "${email.trim()}" already exists. Please use a different email.`);
-      }
-      else {
-        setError(err.message);
-      }
+      setError(err.message);
       console.error("LOGIN ERROR:", err.message);
     }
   }

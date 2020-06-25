@@ -1,5 +1,5 @@
 import React from 'react';
-import { useQuery, useMutation } from '@apollo/react-hooks';
+import { useQuery, useMutation } from 'urql';
 import { LOG_OUT } from '@/graphql/api';
 import { NavLink, withRouter } from 'react-router-dom';
 import styles from "./Navigation.module.scss";
@@ -9,7 +9,7 @@ const Navigation = (props) => {
   const [logoutMutation, logoutStatus] = useMutation(LOG_OUT);
 
   const handleLogout = async (e) => {
-    const id = "0x7537";
+    const id = "0x7537"; // user id
     try {
       await logoutMutation({
         variables: {

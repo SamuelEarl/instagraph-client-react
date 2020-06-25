@@ -7,7 +7,6 @@ import styles from "./Auth.module.scss";
 import "./Auth.scss";
 
 const Auth = (props) => {
-  console.log("AUTH PROPS:", props);
   const [selectedForm, setSelectedForm] = useState('loginForm');
   let displayForm;
 
