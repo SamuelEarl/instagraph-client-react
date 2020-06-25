@@ -1,6 +1,6 @@
 import React from 'react';
 import { formatDate } from '@/utils';
-import './Modal.scss';
+import './Modals.global.scss';
 import styles from './PostModal.module.scss';
 
 const PostModal = ({ post, setShowModal }) => {

@@ -3,8 +3,8 @@ import { useQuery, useMutation } from 'urql';
 import { GET_AUTHOR, GET_ALL_POSTS } from '@/graphql/api';
 import { formatDate, teaserText } from '@/utils';
 import Button from '@/components/Button';
-import CommentModal from '@/components/CommentModal';
-import PostModal from '@/components/PostModal';
+import CommentModal from '@/components/modals/CommentModal';
+import PostModal from '@/components/modals/PostModal';
 import styles from "./Dashboard.module.scss";
 
 const Dashboard = () => {

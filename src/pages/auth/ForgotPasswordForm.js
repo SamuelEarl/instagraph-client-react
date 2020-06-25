@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import Button from '@/components/Button';
+// Styles are in the "AuthLayout.global.scss" file
 
 const ForgotPasswordForm = (props) => {
   const [email, setEmail] = useState('');
@@ -26,7 +28,7 @@ const ForgotPasswordForm = (props) => {
         <Button size="fullWidth">Submit</Button>
 
         <div className="switchForm">
-          <p onClick={() => props.setSelectedForm('loginForm')}>Back to Log In</p>
+          <NavLink to="/sign-in" exact>Back To Sign In</NavLink>
         </div>
       </div>
     </form>

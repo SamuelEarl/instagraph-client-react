@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 
-export const SIGN_UP = gql`
+export const REGISTER = gql`
   mutation CreateAuthor($firstName: String!, $lastName: String!, $email: String!, $password: String!, $sessionId: String!) {
     addAuthor(input: [
       {
@@ -25,7 +25,7 @@ export const SIGN_UP = gql`
 `;
 
 
-export const LOG_IN = gql`
+export const SIGN_IN = gql`
   mutation UpdateAuthorSessionId($email: String!, $password: String!, $sessionId: String!) {
     updateAuthor(input: {
       filter: {
@@ -49,7 +49,7 @@ export const LOG_IN = gql`
   }
 `;
 
-export const LOG_OUT = gql`
+export const SIGN_OUT = gql`
   mutation ClearAuthorSessionId($id: ID!) {
     updateAuthor(input: {
       filter: {

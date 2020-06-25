@@ -1,6 +1,6 @@
 import React from 'react';
 import Navigation from '@/components/Navigation';
-import styles from "./Layout.module.scss";
+import styles from "./AppLayout.module.scss";
 
 const Layout = (props) => {
   return (

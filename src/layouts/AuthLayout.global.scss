@@ -1,5 +1,3 @@
-// Shared styles for Auth components.
-
 @import "@/assets/scss/variables.scss";
 
 @media #{$xs-up} {
@@ -16,7 +14,8 @@
     justify-content: space-between;
     margin-top: 20px;
 
-    p {
+    a {
+      text-decoration: none;
       color: $primary;
       cursor: pointer;
     }

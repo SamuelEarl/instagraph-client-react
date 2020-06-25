@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Button from '@/components/Button';
-import './Modal.scss';
+import './Modals.global.scss';
 import styles from './CommentModal.module.scss';
 
 const CommentModal = (props) => {

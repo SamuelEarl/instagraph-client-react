@@ -1,30 +1,30 @@
 import React from 'react';
 import { useQuery, useMutation } from 'urql';
-import { LOG_OUT } from '@/graphql/api';
+import { SIGN_OUT } from '@/graphql/api';
 import { NavLink, withRouter } from 'react-router-dom';
 import styles from "./Navigation.module.scss";
 
 const Navigation = (props) => {
 
-  const [logoutMutation, logoutStatus] = useMutation(LOG_OUT);
+  const [signOutMutation, signOutStatus] = useMutation(SIGN_OUT);
 
-  const handleLogout = async (e) => {
+  const handleSignOut = async (e) => {
     const id = "0x7537"; // user id
     try {
-      await logoutMutation({
+      await signOutMutation({
         variables: {
           id: id, // I need to get the Author ID from Apollo Client.
         }
       });
 
-      console.log("User logged out");
+      console.log("User signed out");
 
       // React Router's `history` object is available through the `withRouter` HOC.
-      // After successful logout, redirect user to the login page.
-      props.history.push('/login');
+      // After successful sign out, redirect user to the Sign In page.
+      props.history.push('/sign-in');
     }
     catch(err) {
-      console.error("LOG OUT ERROR:", err.message);
+      console.error("SIGN OUT ERROR:", err.message);
     }
   }
 
@@ -48,18 +48,10 @@ const Navigation = (props) => {
                 Profile
               </NavLink>
             </li>
-            {/* <li>
-              <NavLink to="/login" exact activeClassName={styles.active}>
-                Login
-              </NavLink>
-            </li> */}
             <li>
-              <button className={styles.navButton} onClick={() => handleLogout()}>
-                Logout
+              <button className={styles.navButton} onClick={() => handleSignOut()}>
+                Sign Out
               </button>
-              {/* <NavLink to="/logout" exact activeClassName={styles.active}>
-                Logout
-              </NavLink> */}
             </li>
           </ul>
         </nav>

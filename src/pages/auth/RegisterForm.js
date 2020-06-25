@@ -1,21 +1,23 @@
 import React, { useState } from 'react';
+import { NavLink, withRouter } from 'react-router-dom';
 import { useQuery, useMutation } from 'urql';
-import { SIGN_UP } from '@/graphql/api';
+import { REGISTER } from '@/graphql/api';
 import { v4 as uuidv4 } from 'uuid';
 import Button from '@/components/Button';
+// Styles are in the "AuthLayout.global.scss" file
 
-const SignUpForm = (props) => {
+const RegisterForm = (props) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [signUpResult, signUp] = useMutation(SIGN_UP);
+  const [registerResult, register] = useMutation(REGISTER);
 
-  const handleSignUp = async (e) => {
+  const handleRegister = async (e) => {
     try {
       e.preventDefault();
-      const user = await signUp({
+      const user = await register({
         // Comment one of these fields out to throw an error and test for errors.
         firstName: firstName.trim(),
         lastName: lastName.trim(),
@@ -36,12 +38,12 @@ const SignUpForm = (props) => {
         throw Error(user.error);
       }
 
-      // After successful sign up, redirect user to the "verification email sent" page.
+      // After successful registration, redirect user to the "verification email sent" page.
       // I won't show how to do this in this tutorial, but you can try this on your own.
       // props.history.push('/verification-email-sent');
 
-      // Instead, after successful sign up, redirect user to the login page.
-      props.setSelectedForm('loginForm');
+      // Instead, after successful registration, redirect user to the Sign In page.
+      props.history.push('/sign-in');
     }
     catch(err) {
       if (err.message === "[GraphQL] must be defined") {
@@ -53,12 +55,12 @@ const SignUpForm = (props) => {
       else {
         setError(err.message);
       }
-      console.error("SIGN UP ERROR:", err.message);
+      console.error("REGISTRATION ERROR:", err.message);
     }
   }
 
   return (
-    <form onSubmit={handleSignUp}>
+    <form onSubmit={handleRegister}>
       <h1 className="authHeader">Get Started</h1>
 
       <input
@@ -89,10 +91,10 @@ const SignUpForm = (props) => {
         onChange={e => setPassword(e.target.value)}
       />
 
-      <Button size="fullWidth">Sign Up</Button>
+      <Button size="fullWidth">Register</Button>
 
       <div className="switchForm">
-        <p onClick={() => props.setSelectedForm('loginForm')}>Back to Log In</p>
+        <NavLink to="/sign-in" exact>Back To Sign In</NavLink>
       </div>
 
       {/* If an error message exists, then display it to the user. */}
@@ -101,4 +103,4 @@ const SignUpForm = (props) => {
   );
 };
 
-export default SignUpForm;
+export default withRouter(RegisterForm);

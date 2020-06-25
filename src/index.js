@@ -8,7 +8,7 @@ import { schema } from '@/graphql/schema';
 import { resolvers } from '@/graphql/resolvers';
 // import defaultState from '@/graphql/store';
 import Router from './router';
-import './index.scss';
+import './index.global.scss';
 import * as serviceWorker from './serviceWorker';
 
 // const client = new ApolloClient({
