@@ -28,7 +28,7 @@ const ForgotPasswordForm = (props) => {
         <Button size="fullWidth">Submit</Button>
 
         <div className="switchForm">
-          <NavLink to="/sign-in" exact>Back To Sign In</NavLink>
+          <NavLink to="/sign-in" exact>Sign In</NavLink>
         </div>
       </div>
     </form>

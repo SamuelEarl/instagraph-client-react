@@ -13,25 +13,27 @@ const CommentModal = (props) => {
   }
 
   return (
-    <div className="modal">
-      <div className="modalContent">
-        <div className="modalHeader">
-          <p
-            className="modalClose"
-            onClick={() => props.setShowModal(false)}
-          >
-            &times;
-          </p>
+    <div id="modals">
+      <div className="modal">
+        <div className="modalContent">
+          <div className="modalHeader">
+            <p
+              className="modalClose"
+              onClick={() => props.setShowModal(false)}
+            >
+              &times;
+            </p>
+          </div>
+          <p className={styles.addCommentHeading}>Add a comment</p>
+          <form onSubmit={handleSubmitComment}>
+            <textarea
+              className={styles.addCommentText}
+              value={comment}
+              onChange={e => setComment(e.target.value)}
+            />
+            <Button disabled={!comment}>Add comment</Button>
+          </form>
         </div>
-        <p className={styles.addCommentHeading}>Add a comment</p>
-        <form onSubmit={handleSubmitComment}>
-          <textarea
-            className={styles.addCommentText}
-            value={comment}
-            onChange={e => setComment(e.target.value)}
-          />
-          <Button disabled={!comment}>Add comment</Button>
-        </form>
       </div>
     </div>
   );

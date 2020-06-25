@@ -1,23 +1,26 @@
 @import "@/assets/scss/variables.scss";
 
 @media #{$xs-up} {
-  .authHeader {
-    margin-bottom: 20px;
-  }
+  #authLayout {
 
-  .authContent {
-    margin-bottom: 20px;
-  }
+    .authHeader {
+      margin-bottom: 20px;
+    }
 
-  .switchForm {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
+    .authContent {
+      margin-bottom: 20px;
+    }
 
-    a {
-      text-decoration: none;
-      color: $primary;
-      cursor: pointer;
+    .switchForm {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+
+      a {
+        text-decoration: none;
+        color: $primary;
+        cursor: pointer;
+      }
     }
   }
 }

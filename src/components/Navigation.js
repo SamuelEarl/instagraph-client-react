@@ -6,14 +6,17 @@ import styles from "./Navigation.module.scss";
 
 const Navigation = (props) => {
 
-  const [signOutMutation, signOutStatus] = useMutation(SIGN_OUT);
+  const [signOutResult, signOut] = useMutation(SIGN_OUT);
 
   const handleSignOut = async (e) => {
+    // TODO: Get the userId from the GraphQL cache and set the user's sessionId to null and clear the user data from the urql cache.
+    // Then remove all references to Apollo Client.
     const id = "0x7537"; // user id
+
     try {
-      await signOutMutation({
+      await signOut({
         variables: {
-          id: id, // I need to get the Author ID from Apollo Client.
+          id: id, // I need to get the Author ID from the urql cache.
         }
       });
 

@@ -17,18 +17,19 @@ const SignInForm = (props) => {
     try {
       e.preventDefault();
       const user = await signIn({
-        email: email.trim(),
+        // email: email.trim(),
         password: password.trim(),
         sessionId: uuidv4(), // The sessionId should be generated on the server. I will take care of that when I refactor the code to use custom resolvers.
       });
+
+      // TODO: Store user object from response in urql's cache.
+      // code goes here...
+      console.log("SIGNED IN USER:", user);
+
       // Reset the input fields back to their original values.
       setEmail('');
       setPassword('');
       setError('');
-
-      // Store user object from response in ApolloClient's local app state.
-      // code goes here...
-      console.log("SIGNED IN USER:", user);
 
       if (user.error) {
         throw Error(user.error);
@@ -38,7 +39,12 @@ const SignInForm = (props) => {
       props.history.push('/dashboard');
     }
     catch(err) {
-      setError(err.message);
+      if (err.message === "[GraphQL] must be defined") {
+        setError("All fields are required");
+      }
+      else {
+        setError(err.message);
+      }
       console.error("SIGN IN ERROR:", err.message);
     }
   }
@@ -67,6 +73,9 @@ const SignInForm = (props) => {
         <NavLink to="/register" exact>Register For Account</NavLink>
         <NavLink to="/forgot-password" exact>Forgot Password</NavLink>
       </div>
+
+      {/* If an error message exists, then display it to the user. */}
+      {error ? <div className="error">{error}</div> : null}
     </form>
   );
 };

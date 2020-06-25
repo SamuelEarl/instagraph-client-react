@@ -38,7 +38,7 @@ const RegisterForm = (props) => {
         throw Error(user.error);
       }
 
-      // After successful registration, redirect user to the "verification email sent" page.
+      // After successful registration, redirect user to the "Verification Email Sent" page.
       // I won't show how to do this in this tutorial, but you can try this on your own.
       // props.history.push('/verification-email-sent');
 
@@ -94,7 +94,7 @@ const RegisterForm = (props) => {
       <Button size="fullWidth">Register</Button>
 
       <div className="switchForm">
-        <NavLink to="/sign-in" exact>Back To Sign In</NavLink>
+        <NavLink to="/sign-in" exact>Sign In</NavLink>
       </div>
 
       {/* If an error message exists, then display it to the user. */}

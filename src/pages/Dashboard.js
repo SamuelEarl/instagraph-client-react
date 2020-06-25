@@ -14,7 +14,7 @@ const Dashboard = () => {
   const [postToView, setPostToView] = useState('');
   let authorData;
 
-  const [getAuthorResult, reExecuteAuthorQuery] = useQuery({
+  const [getAuthorResult, reexecuteAuthorQuery] = useQuery({
     query: GET_AUTHOR,
     variables: {
       id: '0x4e4b'
@@ -28,7 +28,7 @@ const Dashboard = () => {
     authorData = (<h3>{author.firstName} {author.lastName}</h3>)
   }
 
-  const [getAllPostsResult, reExecutePostsQuery] = useQuery({
+  const [getAllPostsResult, reexecutePostsQuery] = useQuery({
     query: GET_ALL_POSTS
   });
   console.log("getAllPostsResult:", getAllPostsResult);
