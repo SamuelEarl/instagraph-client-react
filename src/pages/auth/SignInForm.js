@@ -17,7 +17,7 @@ const SignInForm = (props) => {
     try {
       e.preventDefault();
       const user = await signIn({
-        // email: email.trim(),
+        email: email.trim(),
         password: password.trim(),
         sessionId: uuidv4(), // The sessionId should be generated on the server. I will take care of that when I refactor the code to use custom resolvers.
       });

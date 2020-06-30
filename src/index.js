@@ -4,9 +4,7 @@ import { createClient, Provider } from 'urql';
 // import ApolloClient from 'apollo-boost';
 // import { ApolloProvider } from '@apollo/react-hooks';
 import 'typeface-open-sans';
-import { schema } from '@/graphql/schema';
-import { resolvers } from '@/graphql/resolvers';
-// import defaultState from '@/graphql/store';
+import { typeDefs, defaultState, resolvers } from '@/graphql/client/schema';
 import Router from './router';
 import './index.global.scss';
 import * as serviceWorker from './serviceWorker';
@@ -14,7 +12,7 @@ import * as serviceWorker from './serviceWorker';
 // const client = new ApolloClient({
 //   // cache,
 //   uri: 'http://localhost:8080/graphql',
-//   schema,
+//   typeDefs,
 //   resolvers
 // });
 // cache.writeData({
