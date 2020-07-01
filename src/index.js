@@ -1,40 +1,39 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createClient, Provider } from 'urql';
-// import ApolloClient from 'apollo-boost';
-// import { ApolloProvider } from '@apollo/react-hooks';
-import 'typeface-open-sans';
+import { ApolloClient } from "apollo-client";
+import { InMemoryCache } from "apollo-cache-inmemory";
+import { HttpLink } from "apollo-link-http";
+import { ApolloProvider } from "@apollo/react-hooks";
 import { typeDefs, defaultState, resolvers } from '@/graphql/client/schema';
-import Router from './router';
+import Routes from './routes';
 import './index.global.scss';
+import 'typeface-open-sans';
 import * as serviceWorker from './serviceWorker';
 
-// const client = new ApolloClient({
-//   // cache,
-//   uri: 'http://localhost:8080/graphql',
-//   typeDefs,
-//   resolvers
-// });
-// cache.writeData({
-//   data: defaultState
-// });
+const cache = new InMemoryCache();
+const client = new ApolloClient({
+  cache,
+  link: new HttpLink({
+    // headers: { authorization: localStorage.getItem('token') },
+    uri: 'http://localhost:8080/graphql',
+  }),
+  typeDefs,
+  resolvers
+});
 
-const client = createClient({
-  url: 'http://localhost:8080/graphql',
-  // Optional fetch options: https://formidable.com/open-source/urql/docs/basics/getting-started/
-  // fetchOptions: () => {
-  //   const token = getToken();
-  //   return {
-  //     headers: { authorization: token ? `Bearer ${token}` : '' },
-  //   };
+cache.writeData({
+  data: defaultState
+  // data: {
+  //   isLoggedIn: !!localStorage.getItem('token'),
+  //   cartItems: [],
   // },
 });
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider value={client}>
-      <Router />
-    </Provider>
+    <ApolloProvider client={client}>
+      <Routes />
+    </ApolloProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

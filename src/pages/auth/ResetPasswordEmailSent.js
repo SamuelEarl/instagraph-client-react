@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from '@reach/router';
 import Button from '@/components/Button';
 // Styles are in the "AuthLayout.global.scss" file
 
@@ -9,7 +9,7 @@ const PasswordResetSuccess = () => {
       <h1 className="authHeader">Email Sent</h1>
       <p className="authContent">Check your email for a link to reset your password.</p>
 
-      <NavLink to="/sign-in" exact>Sign In</NavLink>
+      <Link to="/sign-in">Sign In</Link>
     </div>
   );
 };

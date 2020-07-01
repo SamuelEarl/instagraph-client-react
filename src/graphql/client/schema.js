@@ -1,14 +1,14 @@
 // This is the client-side state. This is like the `state` object in Vuex - it defines the data that are available on the client.
 // Since queries (i.e. the fields in the Query object) execute as soon as a component mounts, it is important to provide default values / default state for each of the queries, otherwise the queries could cause errors. The default state is set in the `@src/index.js` file where ApolloClient is defined.
 
-// import gql from 'graphql-tag';
+import gql from 'graphql-tag';
 
-// export const typeDefs = gql`
-//   extend type Query {
-//     # fieldName: DataType
-//     authenticated: Boolean!
-//   }
-// `;
+export const typeDefs = gql`
+  extend type Query {
+    # fieldName: DataType
+    authenticated: Boolean!
+  }
+`;
 
 // --------------------------------------------------------------------------------
 // Default state values

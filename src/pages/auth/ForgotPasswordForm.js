@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from '@reach/router';
 import Button from '@/components/Button';
 // Styles are in the "AuthLayout.global.scss" file
 
@@ -28,7 +28,7 @@ const ForgotPasswordForm = (props) => {
         <Button size="fullWidth">Submit</Button>
 
         <div className="switchForm">
-          <NavLink to="/sign-in" exact>Sign In</NavLink>
+          <Link to="/sign-in">Sign In</Link>
         </div>
       </div>
     </form>

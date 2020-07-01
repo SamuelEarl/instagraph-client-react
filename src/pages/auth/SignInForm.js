@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import { useQuery, useMutation } from 'urql';
-import { SIGN_IN } from '@/graphql/api';
-import { withRouter } from 'react-router-dom';
+import { Link, navigate } from '@reach/router';
+import { useQuery, useMutation } from '@apollo/react-hooks';
+import { SIGN_IN } from '@/graphql/server/api';
 import { v4 as uuidv4 } from 'uuid';
 import Button from '@/components/Button';
 // Styles are in the "AuthLayout.global.scss" file
@@ -10,40 +9,38 @@ import Button from '@/components/Button';
 const SignInForm = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const [signInResult, signIn] = useMutation(SIGN_IN);
+  const [errorMsg, setErrorMsg] = useState('');
+  const [signIn, { data, loading, error }] = useMutation(SIGN_IN);
 
   const handleSignIn = async (e) => {
     try {
       e.preventDefault();
       const user = await signIn({
-        email: email.trim(),
-        password: password.trim(),
-        sessionId: uuidv4(), // The sessionId should be generated on the server. I will take care of that when I refactor the code to use custom resolvers.
+        variables: {
+          email: email.trim(),
+          password: password.trim(),
+          sessionId: uuidv4(), // The sessionId should be generated on the server. I will take care of that when I refactor the code to use custom resolvers.
+        }
       });
 
-      // TODO: Store user object from response in urql's cache.
+      // TODO: Store user object from response in ApolloClient's cache.
       // code goes here...
       console.log("SIGNED IN USER:", user);
 
       // Reset the input fields back to their original values.
       setEmail('');
       setPassword('');
-      setError('');
-
-      if (user.error) {
-        throw Error(user.error);
-      }
+      setErrorMsg('');
 
       // After successful sign in, redirect user to the "Dashboard" page.
-      props.history.push('/dashboard');
+      navigate('/app/dashboard');
     }
     catch(err) {
-      if (err.message === "[GraphQL] must be defined") {
-        setError("All fields are required");
+      if (err.message === "GraphQL error: must be defined") {
+        setErrorMsg("All fields are required");
       }
       else {
-        setError(err.message);
+        setErrorMsg(err.message);
       }
       console.error("SIGN IN ERROR:", err.message);
     }
@@ -70,14 +67,14 @@ const SignInForm = (props) => {
       <Button size="fullWidth">Sign In</Button>
 
       <div className="switchForm">
-        <NavLink to="/register" exact>Register For Account</NavLink>
-        <NavLink to="/forgot-password" exact>Forgot Password</NavLink>
+        <Link to="/register">Register For Account</Link>
+        <Link to="/forgot-password">Forgot Password</Link>
       </div>
 
       {/* If an error message exists, then display it to the user. */}
-      {error ? <div className="error">{error}</div> : null}
+      {errorMsg ? <div className="errorMsg">{errorMsg}</div> : null}
     </form>
   );
 };
 
-export default withRouter(SignInForm);
+export default SignInForm;

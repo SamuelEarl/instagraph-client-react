@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { NavLink, withRouter } from 'react-router-dom';
-import { useQuery, useMutation } from 'urql';
-import { REGISTER } from '@/graphql/api';
+import { Link, navigate } from '@reach/router';
+import { useQuery, useMutation } from '@apollo/react-hooks';
+import { REGISTER } from '@/graphql/server/api';
 import { v4 as uuidv4 } from 'uuid';
 import Button from '@/components/Button';
 // Styles are in the "AuthLayout.global.scss" file
@@ -11,49 +11,48 @@ const RegisterForm = (props) => {
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const [registerResult, register] = useMutation(REGISTER);
+  const [errorMsg, setErrorMsg] = useState('');
+  const [register, { data, loading, error }] = useMutation(REGISTER);
 
   const handleRegister = async (e) => {
     try {
       e.preventDefault();
+
       const user = await register({
-        // Comment one of these fields out to throw an error and test for errors.
-        firstName: firstName.trim(),
-        lastName: lastName.trim(),
-        email: email.trim(),
-        password: password.trim(),
-        sessionId: '',
+        variables: {
+          // Comment one of these fields out to throw an error and test for errors.
+          firstName: firstName.trim(),
+          lastName: lastName.trim(),
+          email: email.trim(),
+          password: password.trim(),
+          sessionId: 'asdf',
+        }
       });
       // Reset the input fields back to their original values.
       setFirstName('');
       setLastName('');
       setEmail('');
       setPassword('');
-      setError('');
+      setErrorMsg('');
 
-      console.log("SIGNED UP USER:", user);
-
-      if (user.error) {
-        throw Error(user.error);
-      }
+      console.log("REGISTERED USER:", user);
 
       // After successful registration, redirect user to the "Verification Email Sent" page.
       // I won't show how to do this in this tutorial, but you can try this on your own.
-      // props.history.push('/verification-email-sent');
+      // navigate('/verification-email-sent');
 
       // Instead, after successful registration, redirect user to the Sign In page.
-      props.history.push('/sign-in');
+      navigate('/sign-in');
     }
     catch(err) {
-      if (err.message === "[GraphQL] must be defined") {
-        setError("All fields are required");
+      if (err.message === "GraphQL error: must be defined") {
+        setErrorMsg("All fields are required");
       }
-      else if (err.message === `[GraphQL] couldn't rewrite query for mutation addAuthor because id ${email.trim()} already exists for type Author`) {
-        setError(`A user with the email "${email.trim()}" already exists. Please use a different email.`);
+      else if (err.message === `GraphQL error: couldn't rewrite query for mutation addAuthor because id ${email.trim()} already exists for type Author`) {
+        setErrorMsg(`A user with the email "${email.trim()}" already exists. Please use a different email.`);
       }
       else {
-        setError(err.message);
+        setErrorMsg(err.message);
       }
       console.error("REGISTRATION ERROR:", err.message);
     }
@@ -94,13 +93,13 @@ const RegisterForm = (props) => {
       <Button size="fullWidth">Register</Button>
 
       <div className="switchForm">
-        <NavLink to="/sign-in" exact>Sign In</NavLink>
+        <Link to="/sign-in">Sign In</Link>
       </div>
 
       {/* If an error message exists, then display it to the user. */}
-      {error ? <div className="error">{error}</div> : null}
+      {errorMsg ? <div className="errorMsg">{errorMsg}</div> : null}
     </form>
   );
 };
 
-export default withRouter(RegisterForm);
+export default RegisterForm;

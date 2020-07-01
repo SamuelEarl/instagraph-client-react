@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { useQuery, useMutation } from 'urql';
-import { GET_AUTHOR, GET_ALL_POSTS } from '@/graphql/api';
+import { useQuery, useMutation } from '@apollo/react-hooks';
+import { GET_AUTHOR, GET_ALL_POSTS } from '@/graphql/server/api';
 import { formatDate, teaserText } from '@/utils';
 import Button from '@/components/Button';
 import CommentModal from '@/components/modals/CommentModal';
@@ -14,30 +14,27 @@ const Dashboard = () => {
   const [postToView, setPostToView] = useState('');
   let authorData;
 
-  const [getAuthorResult, reexecuteAuthorQuery] = useQuery({
-    query: GET_AUTHOR,
+  const getAuthorQuery = useQuery(GET_AUTHOR, {
     variables: {
       id: '0x4e4b'
     }
   });
-  if (!getAuthorResult.data || !getAuthorResult.data.getAuthor) {
+  if (!getAuthorQuery.data || !getAuthorQuery.data.getAuthor) {
     authorData = (<h3>Loading author data...</h3>);
   }
   else {
-    const author = getAuthorResult.data.getAuthor;
+    const author = getAuthorQuery.data.getAuthor;
     authorData = (<h3>{author.firstName} {author.lastName}</h3>)
   }
 
-  const [getAllPostsResult, reexecutePostsQuery] = useQuery({
-    query: GET_ALL_POSTS
-  });
-  console.log("getAllPostsResult:", getAllPostsResult);
+  const getAllPostsQuery = useQuery(GET_ALL_POSTS);
+  console.log("getAllPostsQuery:", getAllPostsQuery);
   let posts;
-  if (!getAllPostsResult.data || getAllPostsResult.data.queryPost.length === 0) {
+  if (!getAllPostsQuery.data || getAllPostsQuery.data.queryPost.length === 0) {
     posts = (<p className={styles.noPosts}>There are currently no posts.</p>);
   }
   else {
-    const postsArray = getAllPostsResult.data.queryPost;
+    const postsArray = getAllPostsQuery.data.queryPost;
     posts = postsArray.map(post => {
       return (
         <div className={styles.post} key={post.id}>
