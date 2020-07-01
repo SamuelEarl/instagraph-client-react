@@ -25,7 +25,7 @@ const RegisterForm = (props) => {
           lastName: lastName.trim(),
           email: email.trim(),
           password: password.trim(),
-          sessionId: 'asdf',
+          sessionId: '',
         }
       });
       // Reset the input fields back to their original values.

@@ -15,6 +15,19 @@ import AppLayout from '@/layouts/AppLayout';
 import Dashboard from '@/pages/Dashboard';
 import Profile from '@/pages/Profile';
 
+const IS_AUTHENTICATED = gql`
+  query IsUserAuthenticated {
+    isAuthenticated @client
+  }
+`;
+
+// For this demo app, I will use the same non-secure token-based auth that Apollo uses in their tutorial.
+// I need to set that up and then test these private route configs to see if they work.
+
+// See how Gatsby handles private routes: https://www.gatsbyjs.org/docs/building-a-site-with-authentication/#setting-up-client-only-routes.
+const { data } = useQuery(IS_AUTHENTICATED);
+const isAuthenticated = data.isAuthenticated;
+
 const Routes = () => {
   return (
     <Router>
@@ -25,10 +38,14 @@ const Routes = () => {
         <ForgotPasswordForm path="forgot-password" />
         <ResetPasswordEmailSent path="reset-password-email-sent" />
       </AuthLayout>
-      <AppLayout path="app">
-        <Dashboard path="dashboard" />
-        <Profile path="profile" />
-      </AppLayout>
+      {
+        isAuthenticated ?
+        <AppLayout path="app">
+          <Dashboard path="dashboard" />
+          <Profile path="profile" />
+        </AppLayout> :
+        <SignInForm path="sign-in" />
+      }
     </Router>
   );
 };
