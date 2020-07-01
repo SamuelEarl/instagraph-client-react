@@ -23,6 +23,15 @@
       }
     }
 
+    .loadingMsg {
+      background: $primary;
+      color: $white;
+      padding: 0.8rem 1rem;
+      font-size: 16px;
+      border-radius: 3px;
+      text-align: center;
+    }
+
     .errorMsg {
       margin-top: 20px;
       padding: 15px;

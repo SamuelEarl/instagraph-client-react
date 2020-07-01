@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, navigate } from '@reach/router';
-import { useQuery, useMutation } from '@apollo/react-hooks';
+import { useApolloClient, useMutation } from '@apollo/react-hooks';
 import { SIGN_IN } from '@/graphql/server/api';
 import { v4 as uuidv4 } from 'uuid';
 import Button from '@/components/Button';
@@ -9,33 +9,47 @@ import Button from '@/components/Button';
 const SignInForm = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loadingMsg, setLoadingMsg] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
-  const [signIn, { data, loading, error }] = useMutation(SIGN_IN);
+  const [signIn, { loading, error }] = useMutation(SIGN_IN);
+  const client = useApolloClient();
 
   const handleSignIn = async (e) => {
     try {
       e.preventDefault();
+
+      setLoadingMsg("Loading...");
+
       const user = await signIn({
         variables: {
           email: email.trim(),
           password: password.trim(),
-          sessionId: uuidv4(), // The sessionId should be generated on the server. I will take care of that when I refactor the code to use custom resolvers.
-        }
+          sessionId: uuidv4(), // TODO: The sessionId should be generated on the server. I will take care of that when I refactor the code to use custom resolvers.
+        },
       });
 
-      // TODO: Store user object from response in ApolloClient's cache.
-      // code goes here...
+      // If the user successfully signs in, then store the user object from the response in ApolloClient's cache.
       console.log("SIGNED IN USER:", user);
+      if (user && user.data && user.data.updateAuthor && user.data.updateAuthor.author.length > 0) {
+        localStorage.setItem("sessionId", user.data.updateAuthor.author[0].sessionId);
+        client.writeData({ data: { isAuthenticated: true } });
+        console.log("APOLLO CLIENT:", client);
 
-      // Reset the input fields back to their original values.
-      setEmail('');
-      setPassword('');
-      setErrorMsg('');
+        // Reset the input fields back to their original values.
+        setEmail('');
+        setPassword('');
+        setLoadingMsg('');
+        setErrorMsg('');
 
-      // After successful sign in, redirect user to the "Dashboard" page.
-      navigate('/app/dashboard');
+        // After successful sign in, redirect user to the "Dashboard" page.
+        navigate('/app/dashboard');
+      }
+      else {
+        throw Error('No user exists with those credentials.');
+      }
     }
     catch(err) {
+      setLoadingMsg('');
       if (err.message === "GraphQL error: must be defined") {
         setErrorMsg("All fields are required");
       }
@@ -64,7 +78,12 @@ const SignInForm = (props) => {
         onChange={e => setPassword(e.target.value)}
       />
 
-      <Button size="fullWidth">Sign In</Button>
+      {/* If a loading message exists, then show it to the user otherwise show the "Sign In" button */}
+      {
+        loadingMsg ?
+        <div className="loadingMsg">{loadingMsg}</div> :
+        <Button size="fullWidth">Sign In</Button>
+      }
 
       <div className="switchForm">
         <Link to="/register">Register For Account</Link>

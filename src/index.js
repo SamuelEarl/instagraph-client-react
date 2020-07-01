@@ -14,7 +14,7 @@ const cache = new InMemoryCache();
 const client = new ApolloClient({
   cache,
   link: new HttpLink({
-    // headers: { authorization: localStorage.getItem('token') },
+    // headers: { authorization: localStorage.getItem('sessionId') },
     uri: 'http://localhost:8080/graphql',
   }),
   typeDefs,
@@ -28,6 +28,9 @@ cache.writeData({
   //   cartItems: [],
   // },
 });
+
+console.log("DEFAULT STATE:", defaultState);
+console.log("APOLLO CACHE:", cache);
 
 ReactDOM.render(
   <React.StrictMode>

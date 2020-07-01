@@ -6,7 +6,7 @@ import gql from 'graphql-tag';
 export const typeDefs = gql`
   extend type Query {
     # fieldName: DataType
-    authenticated: Boolean!
+    isAuthenticated: Boolean!
   }
 `;
 
@@ -16,7 +16,7 @@ export const typeDefs = gql`
 // The default values for client-side queries (i.e. getters) go here.
 // https://www.apollographql.com/docs/tutorial/local-state/#initialize-the-store
 export const defaultState = {
-  authenticated: false,
+  isAuthenticated: false,
 };
 
 

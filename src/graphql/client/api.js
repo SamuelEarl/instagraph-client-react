@@ -1,13 +1,13 @@
-// import gql from 'graphql-tag';
+import gql from 'graphql-tag';
 
-// // --------------------------------------------------------------------------------
-// // Queries (i.e. Getters)
-// // --------------------------------------------------------------------------------
-// export const AUTHENTICATED = gql`
-//   query IsUserAuthenticated {
-//     authenticated @client
-//   }
-// `;
+// --------------------------------------------------------------------------------
+// Queries (i.e. Getters)
+// --------------------------------------------------------------------------------
+export const IS_AUTHENTICATED = gql`
+  query IsUserAuthenticated {
+    isAuthenticated @client
+  }
+`;
 
 
 // --------------------------------------------------------------------------------

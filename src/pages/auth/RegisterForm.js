@@ -11,12 +11,15 @@ const RegisterForm = (props) => {
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loadingMsg, setLoadingMsg] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
   const [register, { data, loading, error }] = useMutation(REGISTER);
 
   const handleRegister = async (e) => {
     try {
       e.preventDefault();
+
+      setLoadingMsg("Loading...");
 
       const user = await register({
         variables: {
@@ -33,6 +36,7 @@ const RegisterForm = (props) => {
       setLastName('');
       setEmail('');
       setPassword('');
+      setLoadingMsg('');
       setErrorMsg('');
 
       console.log("REGISTERED USER:", user);
@@ -45,6 +49,7 @@ const RegisterForm = (props) => {
       navigate('/sign-in');
     }
     catch(err) {
+      setLoadingMsg('');
       if (err.message === "GraphQL error: must be defined") {
         setErrorMsg("All fields are required");
       }
@@ -90,7 +95,12 @@ const RegisterForm = (props) => {
         onChange={e => setPassword(e.target.value)}
       />
 
-      <Button size="fullWidth">Register</Button>
+      {/* If a loading message exists, then show it to the user otherwise show the "Register" button */}
+      {
+        loadingMsg ?
+        <div className="loadingMsg">{loadingMsg}</div> :
+        <Button size="fullWidth">Register</Button>
+      }
 
       <div className="switchForm">
         <Link to="/sign-in">Sign In</Link>
