@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useQuery, useMutation } from '@apollo/react-hooks';
-import { GET_AUTHOR, GET_ALL_POSTS } from '@/graphql/server/api';
+import { GET_USER, GET_ALL_POSTS } from '@/graphql/server/api';
 import { formatDate, teaserText } from '@/utils';
 import Button from '@/components/Button';
 import CommentModal from '@/components/modals/CommentModal';
@@ -12,19 +12,19 @@ const Dashboard = () => {
   const [showCommentModal, setShowCommentModal] = useState(false);
   const [showPostModal, setShowPostModal] = useState(false);
   const [postToView, setPostToView] = useState('');
-  let authorData;
+  let userData;
 
-  const getAuthorQuery = useQuery(GET_AUTHOR, {
+  const getUserQuery = useQuery(GET_USER, {
     variables: {
       id: '0x4e4b'
     }
   });
-  if (!getAuthorQuery.data || !getAuthorQuery.data.getAuthor) {
-    authorData = (<h3>Loading author data...</h3>);
+  if (!getUserQuery.data || !getUserQuery.data.getUser) {
+    userData = (<h3>Loading user data...</h3>);
   }
   else {
-    const author = getAuthorQuery.data.getAuthor;
-    authorData = (<h3>{author.firstName} {author.lastName}</h3>)
+    const user = getUserQuery.data.getUser;
+    userData = (<h3>{user.firstName} {user.lastName}</h3>)
   }
 
   const getAllPostsQuery = useQuery(GET_ALL_POSTS);
@@ -38,7 +38,7 @@ const Dashboard = () => {
     posts = postsArray.map(post => {
       return (
         <div className={styles.post} key={post.id}>
-          <h4>{post.author.firstName} {post.author.lastName}</h4>
+          <h4>{post.user.firstName} {post.user.lastName}</h4>
           <span className={styles.date}>{formatDate(post.createdAt)}</span>
           <p>{teaserText(post.content)}</p>
           <ul>
@@ -98,7 +98,7 @@ const Dashboard = () => {
 
       <div className={styles.leftCol}>
         <div className={styles.profile}>
-          {authorData}
+          {userData}
         </div>
         <div className={styles.createPost}>
           <p>Create A Post</p>

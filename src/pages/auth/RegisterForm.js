@@ -51,7 +51,7 @@ const RegisterForm = (props) => {
       if (err.message === "GraphQL error: must be defined") {
         setErrorMsg("All fields are required");
       }
-      else if (err.message === `GraphQL error: couldn't rewrite query for mutation addAuthor because id ${email.trim()} already exists for type Author`) {
+      else if (err.message === `GraphQL error: couldn't rewrite query for mutation addUser because id ${email.trim()} already exists for type User`) {
         setErrorMsg(`A user with the email "${email.trim()}" already exists. Please use a different email.`);
       }
       else {

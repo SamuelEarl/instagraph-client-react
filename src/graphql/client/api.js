@@ -3,6 +3,12 @@ import gql from 'graphql-tag';
 // --------------------------------------------------------------------------------
 // Queries (i.e. Getters)
 // --------------------------------------------------------------------------------
+export const GET_USER = gql`
+  query GetUser {
+    user @client
+  }
+`;
+
 export const IS_AUTHENTICATED = gql`
   query IsUserAuthenticated {
     isAuthenticated @client

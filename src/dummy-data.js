@@ -10,7 +10,7 @@
  * https://codetogo.io/how-to-create-date-in-rfc3339-format-in-javascript/.
  */
 
-export const author = {
+export const user = {
   firstName: "Ryan",
   lastName: "Clark",
   email: "ryan@example.com",

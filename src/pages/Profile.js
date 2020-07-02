@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { author } from '@/dummy-data';
+import { user } from '@/dummy-data';
 import Button from '@/components/Button';
 import styles from "./Profile.module.scss";
 
@@ -24,21 +24,21 @@ const Profile = () => {
           <input
             type="text"
             placeholder="First Name"
-            value={author.firstName}
+            value={user.firstName}
             onChange={e => setFirstName(e.target.value)}
           />
 
           <input
             type="text"
             placeholder="Last Name"
-            value={author.lastName}
+            value={user.lastName}
             onChange={e => setLastName(e.target.value)}
           />
 
           <input
             type="password"
             placeholder="Password"
-            value={author.password}
+            value={user.password}
             onChange={e => setPassword(e.target.value)}
           />
 

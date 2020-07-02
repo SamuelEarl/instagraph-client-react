@@ -23,19 +23,12 @@ import Profile from '@/pages/Profile';
 // This is a combination of how Apollo and Gatsby handle private routes:
 // * Apollo: https://www.apollographql.com/docs/tutorial/local-state/#query-local-data
 // * Gatsby: https://www.gatsbyjs.org/docs/building-a-site-with-authentication/#setting-up-client-only-routes.
-// const IsAuthenticated = () => {
-//   const { data } = useQuery(IS_AUTHENTICATED);
-//   return data.isAuthenticated;
-// }
+const IsAuthenticated = () => {
+  const { data } = useQuery(IS_AUTHENTICATED);
+  return data.isAuthenticated;
+}
 
 const Routes = () => {
-  function IsAuthenticated() {
-    const { data } = useQuery(IS_AUTHENTICATED);
-    return data.isAuthenticated;
-  }
-
-  console.log("IsAuthenticated:", IsAuthenticated());
-
   return (
     <Router>
       <Redirect from="/" to="sign-in" noThrow />

@@ -16,7 +16,7 @@ const Navigation = (props) => {
     try {
       await signOut({
         variables: {
-          id: id, // I need to get the Author ID from the ApolloClient cache.
+          id: id, // I need to get the User ID from the ApolloClient cache.
         }
       });
 

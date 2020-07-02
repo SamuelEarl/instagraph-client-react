@@ -31,17 +31,18 @@ const SignInForm = (props) => {
 
       // If the user successfully signs in, then store the user object from the response in ApolloClient's cache.
       console.log("SIGNED IN USER:", user);
-      if (user && user.data && user.data.updateAuthor && user.data.updateAuthor.author.length > 0) {
-        const userObj = user.data.updateAuthor.author[0];
-        localStorage.setItem("sessionId", user.data.updateAuthor.author[0].sessionId);
+      if (user && user.data && user.data.updateUser && user.data.updateUser.user.length > 0) {
+        const userObj = user.data.updateUser.user[0];
+        localStorage.setItem("sessionId", user.data.updateUser.user[0].sessionId);
         client.writeData({
           data: {
-            user: {
-              id: userObj.id,
-              firstName: userObj.firstName,
-              lastName: userObj.lastName,
-              email: userObj.email,
-            },
+            user: userObj,
+            // user: {
+            //   id: userObj.id,
+            //   firstName: userObj.firstName,
+            //   lastName: userObj.lastName,
+            //   email: userObj.email,
+            // },
             isAuthenticated: true
           }
         });

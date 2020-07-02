@@ -5,7 +5,17 @@ import gql from 'graphql-tag';
 
 export const typeDefs = gql`
   extend type Query {
+    user: User
     isAuthenticated: Boolean!
+  }
+
+# TODO: I need to figure out why the user I can't find the userObj on the data property after I sign in. I see a user object inside the ROOT_QUERY and I see a User object outside of the ROOT_QUERY, but they don't really match up. I think I need to define the User object here, but I am still a little fuzzy on how the local (client-side) state works. I need to read this page again: https://www.apollographql.com/docs/tutorial/local-state/ and come back to the sign-in flow and storing the user object in the cache.
+
+  extend type User {
+    id: ID!
+    firstName: String!
+    lastName: String!
+    email: String!
   }
 `;
 

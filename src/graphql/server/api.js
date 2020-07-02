@@ -2,7 +2,7 @@ import gql from 'graphql-tag';
 
 export const REGISTER = gql`
   mutation Register($firstName: String!, $lastName: String!, $email: String!, $password: String!) {
-    addAuthor(input: [
+    addUser(input: [
       {
         firstName: $firstName
         lastName: $lastName
@@ -11,7 +11,7 @@ export const REGISTER = gql`
       }
     ])
     {
-      author {
+      user {
         id
         firstName
         lastName
@@ -24,7 +24,7 @@ export const REGISTER = gql`
 
 export const SIGN_IN = gql`
   mutation SignIn($email: String!, $password: String!, $sessionId: String) {
-    updateAuthor(input: {
+    updateUser(input: {
       filter: {
         email: { eq: $email }
         password: { eq: $password }
@@ -34,7 +34,7 @@ export const SIGN_IN = gql`
       }
     })
     {
-      author {
+      user {
         id
         firstName
         lastName
@@ -47,7 +47,7 @@ export const SIGN_IN = gql`
 
 export const SIGN_OUT = gql`
   mutation SignOut($id: ID!) {
-    updateAuthor(input: {
+    updateUser(input: {
       filter: {
         id: [$id]
       },
@@ -56,7 +56,7 @@ export const SIGN_OUT = gql`
       }
     })
     {
-      author {
+      user {
         id
         email
       }
@@ -64,9 +64,9 @@ export const SIGN_OUT = gql`
   }
 `;
 
-export const GET_AUTHOR = gql`
-  query GetAuthor($id: ID!) {
-    getAuthor(id: $id) {
+export const GET_USER = gql`
+  query GetUser($id: ID!) {
+    getUser(id: $id) {
       firstName
       lastName
       password
@@ -78,7 +78,7 @@ export const GET_ALL_POSTS = gql`
   query GetAllPosts {
     queryPost {
       id
-      author {
+      user {
         firstName
         lastName
       }

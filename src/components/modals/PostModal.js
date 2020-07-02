@@ -17,7 +17,7 @@ const PostModal = ({ post, setShowModal }) => {
             </div>
           {/* </div> */}
           <div className={styles.post}>
-            <h4>{post.author.firstName} {post.author.lastName}</h4>
+            <h4>{post.user.firstName} {post.user.lastName}</h4>
             <span className={styles.date}>{formatDate(post.createdAt)}</span>
             <p>{post.content}</p>
             <ul>
