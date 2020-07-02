@@ -1,5 +1,5 @@
 import React from 'react';
-import { useQuery, useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/react-hooks';
 import { SIGN_OUT } from '@/graphql/server/api';
 import { Link, navigate } from '@reach/router';
 import styles from "./Navigation.module.scss";
@@ -11,7 +11,7 @@ const Navigation = (props) => {
   const handleSignOut = async (e) => {
     // TODO: Get the userId from the GraphQL cache and set the user's sessionId to null and clear the user data from the ApolloClient cache.
     // Then remove all references to Apollo Client.
-    const id = "0x7537"; // user id
+    const id = "0x9c43"; // user id
 
     try {
       await signOut({
@@ -19,6 +19,9 @@ const Navigation = (props) => {
           id: id, // I need to get the Author ID from the ApolloClient cache.
         }
       });
+
+      // If successful sign out, clear localStorage.
+      localStorage.clear();
 
       console.log("User signed out");
 
@@ -34,19 +37,19 @@ const Navigation = (props) => {
     <header className={styles.header}>
       <div className="container">
         <nav className={styles.navLeft}>
-          <Link to="/dashboard">
+          <Link to="/app/dashboard">
             <h3>Instagraph</h3>
           </Link>
         </nav>
         <nav className={styles.navRight}>
           <ul>
             <li>
-              <Link to="/dashboard">
+              <Link to="/app/dashboard">
                 Dashboard
               </Link>
             </li>
             <li>
-              <Link to="/profile">
+              <Link to="/app/profile">
                 Profile
               </Link>
             </li>

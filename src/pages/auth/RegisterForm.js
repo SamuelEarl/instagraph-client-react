@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { Link, navigate } from '@reach/router';
-import { useQuery, useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/react-hooks';
 import { REGISTER } from '@/graphql/server/api';
-import { v4 as uuidv4 } from 'uuid';
 import Button from '@/components/Button';
 // Styles are in the "AuthLayout.global.scss" file
 
@@ -28,7 +27,6 @@ const RegisterForm = (props) => {
           lastName: lastName.trim(),
           email: email.trim(),
           password: password.trim(),
-          sessionId: '',
         }
       });
       // Reset the input fields back to their original values.

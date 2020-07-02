@@ -18,18 +18,24 @@ import AppLayout from '@/layouts/AppLayout';
 import Dashboard from '@/pages/Dashboard';
 import Profile from '@/pages/Profile';
 
-// TODO: For this demo app, I will use the same non-secure token-based auth that Apollo uses in their tutorial.
-// I need to set that up and then test these private route configs to see if they work.
+// TODO: For this demo app, I will use a similar non-secure, token-based auth flow that Apollo uses in their tutorial. I need to set that up and then test these private route configs to see if they work.
 
 // This is a combination of how Apollo and Gatsby handle private routes:
 // * Apollo: https://www.apollographql.com/docs/tutorial/local-state/#query-local-data
 // * Gatsby: https://www.gatsbyjs.org/docs/building-a-site-with-authentication/#setting-up-client-only-routes.
-const IsAuthenticated = () => {
-  const { data } = useQuery(IS_AUTHENTICATED);
-  return data.isAuthenticated;
-}
+// const IsAuthenticated = () => {
+//   const { data } = useQuery(IS_AUTHENTICATED);
+//   return data.isAuthenticated;
+// }
 
 const Routes = () => {
+  function IsAuthenticated() {
+    const { data } = useQuery(IS_AUTHENTICATED);
+    return data.isAuthenticated;
+  }
+
+  console.log("IsAuthenticated:", IsAuthenticated());
+
   return (
     <Router>
       <Redirect from="/" to="sign-in" noThrow />
@@ -39,14 +45,10 @@ const Routes = () => {
         <ForgotPasswordForm path="forgot-password" />
         <ResetPasswordEmailSent path="reset-password-email-sent" />
       </AuthLayout>
-      {
-        IsAuthenticated ?
-        <AppLayout path="app">
-          <Dashboard path="dashboard" />
-          <Profile path="profile" />
-        </AppLayout> :
-        <SignInForm path="sign-in" />
-      }
+      <AppLayout path="app">
+        {IsAuthenticated() ? <Dashboard path="dashboard" /> : <Redirect from="dashboard" to="/sign-in" noThrow />}
+        {IsAuthenticated() ? <Profile path="profile" /> : <Redirect from="profile" to="/sign-in" noThrow />}
+      </AppLayout>
     </Router>
   );
 };

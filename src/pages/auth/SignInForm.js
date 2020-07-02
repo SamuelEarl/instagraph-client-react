@@ -24,15 +24,27 @@ const SignInForm = (props) => {
         variables: {
           email: email.trim(),
           password: password.trim(),
-          sessionId: uuidv4(), // TODO: The sessionId should be generated on the server. I will take care of that when I refactor the code to use custom resolvers.
+          // TODO: The sessionId should be generated on the server. However, the @custom directive is not supported in the current version of Dgraph. When @custom is supported, then I will remove this sessionId in the client and implement it on the server where it should go. @custom should be supported in v20.07 - https://github.com/dgraph-io/dgraph/issues/5610.
+          sessionId: uuidv4(),
         },
       });
 
       // If the user successfully signs in, then store the user object from the response in ApolloClient's cache.
       console.log("SIGNED IN USER:", user);
       if (user && user.data && user.data.updateAuthor && user.data.updateAuthor.author.length > 0) {
+        const userObj = user.data.updateAuthor.author[0];
         localStorage.setItem("sessionId", user.data.updateAuthor.author[0].sessionId);
-        client.writeData({ data: { isAuthenticated: true } });
+        client.writeData({
+          data: {
+            user: {
+              id: userObj.id,
+              firstName: userObj.firstName,
+              lastName: userObj.lastName,
+              email: userObj.email,
+            },
+            isAuthenticated: true
+          }
+        });
         console.log("APOLLO CLIENT:", client);
 
         // Reset the input fields back to their original values.
@@ -44,8 +56,11 @@ const SignInForm = (props) => {
         // After successful sign in, redirect user to the "Dashboard" page.
         navigate('/app/dashboard');
       }
+      else if(error) {
+        throw Error(error)
+      }
       else {
-        throw Error('No user exists with those credentials.');
+        throw Error("No user exists with those credentials");
       }
     }
     catch(err) {
@@ -56,7 +71,7 @@ const SignInForm = (props) => {
       else {
         setErrorMsg(err.message);
       }
-      console.error("SIGN IN ERROR:", err.message);
+      console.error("SIGN IN ERROR:", err);
     }
   }
 

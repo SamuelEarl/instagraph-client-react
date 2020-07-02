@@ -1,14 +1,13 @@
 import gql from 'graphql-tag';
 
 export const REGISTER = gql`
-  mutation CreateAuthor($firstName: String!, $lastName: String!, $email: String!, $password: String!, $sessionId: String!) {
+  mutation Register($firstName: String!, $lastName: String!, $email: String!, $password: String!) {
     addAuthor(input: [
       {
         firstName: $firstName
         lastName: $lastName
         email: $email
         password: $password
-        sessionId: $sessionId
       }
     ])
     {
@@ -17,8 +16,6 @@ export const REGISTER = gql`
         firstName
         lastName
         email
-        password
-        sessionId
       }
     }
   }
@@ -26,7 +23,7 @@ export const REGISTER = gql`
 
 
 export const SIGN_IN = gql`
-  mutation UpdateAuthorSessionId($email: String!, $password: String!, $sessionId: String!) {
+  mutation SignIn($email: String!, $password: String!, $sessionId: String) {
     updateAuthor(input: {
       filter: {
         email: { eq: $email }
@@ -42,7 +39,6 @@ export const SIGN_IN = gql`
         firstName
         lastName
         email
-        password
         sessionId
       }
     }
@@ -50,7 +46,7 @@ export const SIGN_IN = gql`
 `;
 
 export const SIGN_OUT = gql`
-  mutation ClearAuthorSessionId($id: ID!) {
+  mutation SignOut($id: ID!) {
     updateAuthor(input: {
       filter: {
         id: [$id]
@@ -62,18 +58,14 @@ export const SIGN_OUT = gql`
     {
       author {
         id
-        firstName
-        lastName
         email
-        password
-        sessionId
       }
     }
   }
 `;
 
 export const GET_AUTHOR = gql`
-  query RetrieveAuthor($id: ID!) {
+  query GetAuthor($id: ID!) {
     getAuthor(id: $id) {
       firstName
       lastName
@@ -92,10 +84,10 @@ export const GET_ALL_POSTS = gql`
       }
       createdAt
       content
-      comments { # I want to return the total number of comments. This would be done with a custom resolver function.
+      comments { # I want to return the total number of comments. This would be done with a custom resolver function. https://stackoverflow.com/questions/34321688/can-graphql-return-aggregate-counts
         content
       }
-      likes # I want to return the total number of likes. This would be done with a custom resolver function.
+      likes # I want to return the total number of likes. This would be done with a custom resolver function. https://stackoverflow.com/questions/34321688/can-graphql-return-aggregate-counts
     }
   }
 `;
