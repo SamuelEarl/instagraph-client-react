@@ -67,9 +67,21 @@ export const SIGN_OUT = gql`
 export const GET_USER = gql`
   query GetUser($id: ID!) {
     getUser(id: $id) {
+      id
       firstName
       lastName
-      password
+      email
+    }
+  }
+`;
+
+export const GET_USER_BY_SESSION_ID = gql`
+  query GetUserBySessionID($sessionId: String!) {
+    getUser(sessionId: $sessionId) {
+      id
+      firstName
+      lastName
+      email
     }
   }
 `;

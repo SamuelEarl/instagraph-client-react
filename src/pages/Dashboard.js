@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useQuery, useMutation } from '@apollo/react-hooks';
+import { GET_CURRENT_USER } from '@/graphql/client/api';
 import { GET_USER, GET_ALL_POSTS } from '@/graphql/server/api';
 import { formatDate, teaserText } from '@/utils';
 import Button from '@/components/Button';
@@ -14,18 +15,21 @@ const Dashboard = () => {
   const [postToView, setPostToView] = useState('');
   let userData;
 
-  const getUserQuery = useQuery(GET_USER, {
-    variables: {
-      id: '0x4e4b'
-    }
-  });
-  if (!getUserQuery.data || !getUserQuery.data.getUser) {
-    userData = (<h3>Loading user data...</h3>);
-  }
-  else {
-    const user = getUserQuery.data.getUser;
-    userData = (<h3>{user.firstName} {user.lastName}</h3>)
-  }
+  // const getUserQuery = useQuery(GET_USER, {
+  //   variables: {
+  //     id: '0x4e4b' // TODO: The ID needs to be retrieved dynamically from the cache.
+  //   }
+  // });
+  // if (!getUserQuery.data || !getUserQuery.data.getUser) {
+  //   userData = (<h3>Loading user data...</h3>);
+  // }
+  // else {
+  //   const user = getUserQuery.data.getUser;
+  //   userData = (<h3>{user.firstName} {user.lastName}</h3>)
+  // }
+
+  const { data } = useQuery(GET_CURRENT_USER);
+  console.log("CURRENT USER:", data);
 
   const getAllPostsQuery = useQuery(GET_ALL_POSTS);
   console.log("getAllPostsQuery:", getAllPostsQuery);

@@ -5,7 +5,6 @@ import { Link, navigate } from '@reach/router';
 import styles from "./Navigation.module.scss";
 
 const Navigation = (props) => {
-
   const [signOut, { data, loading, error }] = useMutation(SIGN_OUT);
 
   const handleSignOut = async (e) => {
@@ -17,10 +16,19 @@ const Navigation = (props) => {
       await signOut({
         variables: {
           id: id, // I need to get the User ID from the ApolloClient cache.
+        },
+        update(cache) {
+          // Upon sign out, set the cache's `isAuthenticated` field to `false`.
+          cache.writeData({
+            data: {
+              user: null, // TODO: Find out if this is how I should clear the user from the cache.
+              isAuthenticated: false
+            }
+          });
         }
       });
 
-      // If successful sign out, clear localStorage.
+      // Upon sign out, clear localStorage.
       localStorage.clear();
 
       console.log("User signed out");

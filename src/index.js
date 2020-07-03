@@ -23,10 +23,6 @@ const client = new ApolloClient({
 
 cache.writeData({
   data: defaultState
-  // data: {
-  //   isLoggedIn: !!localStorage.getItem('token'),
-  //   cartItems: [],
-  // },
 });
 
 console.log("DEFAULT STATE:", defaultState);

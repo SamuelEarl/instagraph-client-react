@@ -33,7 +33,7 @@ const SignInForm = (props) => {
       console.log("SIGNED IN USER:", user);
       if (user && user.data && user.data.updateUser && user.data.updateUser.user.length > 0) {
         const userObj = user.data.updateUser.user[0];
-        localStorage.setItem("sessionId", user.data.updateUser.user[0].sessionId);
+        localStorage.setItem("sessionId", userObj.sessionId);
         client.writeData({
           data: {
             user: userObj,

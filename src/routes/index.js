@@ -6,6 +6,7 @@ import React from 'react';
 import { Router, Redirect } from "@reach/router";
 import { useQuery } from '@apollo/react-hooks';
 
+import { GET_USER_BY_SESSION_ID } from '@/graphql/server/api';
 import { IS_AUTHENTICATED } from '@/graphql/client/api';
 
 import AuthLayout from '@/layouts/AuthLayout';
@@ -20,15 +21,25 @@ import Profile from '@/pages/Profile';
 
 // TODO: For this demo app, I will use a similar non-secure, token-based auth flow that Apollo uses in their tutorial. I need to set that up and then test these private route configs to see if they work.
 
-// This is a combination of how Apollo and Gatsby handle private routes:
-// * Apollo: https://www.apollographql.com/docs/tutorial/local-state/#query-local-data
-// * Gatsby: https://www.gatsbyjs.org/docs/building-a-site-with-authentication/#setting-up-client-only-routes.
-const IsAuthenticated = () => {
-  const { data } = useQuery(IS_AUTHENTICATED);
-  return data.isAuthenticated;
-}
-
 const Routes = () => {
+  // If a user refreshes the browser, then get the currently logged in user. When this component first loads, query for the user.
+  // TODO: Update my server-side schema to include a query to get user by session ID. I probably need to add an @id directive to the sessionId field, if possible. If that is not possible, then I need to save the user's email address in localStorage and get the user by email.
+  const currentUser = () => {
+    const { data } = useQuery(GET_USER_BY_SESSION_ID, {
+      variables: {
+        id: localStorage.getItem("sessionId")
+      }
+    })
+  }
+
+  // This is a combination of how Apollo and Gatsby handle private routes:
+  // * Apollo: https://www.apollographql.com/docs/tutorial/local-state/#query-local-data
+  // * Gatsby: https://www.gatsbyjs.org/docs/building-a-site-with-authentication/#setting-up-client-only-routes.
+  const IsAuthenticated = () => {
+    const { data } = useQuery(IS_AUTHENTICATED);
+    return data.isAuthenticated;
+  }
+
   return (
     <Router>
       <Redirect from="/" to="sign-in" noThrow />
@@ -39,8 +50,16 @@ const Routes = () => {
         <ResetPasswordEmailSent path="reset-password-email-sent" />
       </AuthLayout>
       <AppLayout path="app">
-        {IsAuthenticated() ? <Dashboard path="dashboard" /> : <Redirect from="dashboard" to="/sign-in" noThrow />}
-        {IsAuthenticated() ? <Profile path="profile" /> : <Redirect from="profile" to="/sign-in" noThrow />}
+        {
+          IsAuthenticated() ?
+          <Dashboard path="dashboard" /> :
+          <Redirect from="dashboard" to="/sign-in" noThrow />
+        }
+        {
+          IsAuthenticated() ?
+          <Profile path="profile" /> :
+          <Redirect from="profile" to="/sign-in" noThrow />
+        }
       </AppLayout>
     </Router>
   );
