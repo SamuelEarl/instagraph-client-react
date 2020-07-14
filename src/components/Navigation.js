@@ -1,43 +1,51 @@
 import React from 'react';
-import { useMutation } from '@apollo/react-hooks';
-import { SIGN_OUT } from '@/graphql/server/api';
+import { useApolloClient, useMutation } from '@apollo/react-hooks';
+import { auth } from '@/init-firebase.js';
+// TODO: Delete all unused code.
+import { LOG_OUT } from '@/graphql/server/api';
 import { Link, navigate } from '@reach/router';
 import styles from "./Navigation.module.scss";
 
 const Navigation = (props) => {
-  const [signOut, { data, loading, error }] = useMutation(SIGN_OUT);
+  // const [logOut, { data, loading, error }] = useMutation(LOG_OUT);
+  const client = useApolloClient();
 
-  const handleSignOut = async (e) => {
-    // TODO: Get the userId from the GraphQL cache and set the user's sessionId to null and clear the user data from the ApolloClient cache.
-    // Then remove all references to Apollo Client.
-    const id = "0x9c43"; // user id
-
+  const handleLogOut = async (e) => {
     try {
-      await signOut({
-        variables: {
-          id: id, // I need to get the User ID from the ApolloClient cache.
-        },
-        update(cache) {
-          // Upon sign out, set the cache's `isAuthenticated` field to `false`.
-          cache.writeData({
-            data: {
-              user: null, // TODO: Find out if this is how I should clear the user from the cache.
-              isAuthenticated: false
-            }
-          });
+      auth.signOut();
+
+      client.writeData({
+        data: {
+          user: null, // TODO: Find out if this is how I should clear the user from the cache.
+          isAuthenticated: false
         }
       });
 
-      // Upon sign out, clear localStorage.
-      localStorage.clear();
+      // await logOut({
+      //   variables: {
+      //     id: id, // I need to get the User ID from the ApolloClient cache.
+      //   },
+      //   update(cache) {
+      //     // Upon log out, set the cache's `isAuthenticated` field to `false`.
+      //     cache.writeData({
+      //       data: {
+      //         user: null, // TODO: Find out if this is how I should clear the user from the cache.
+      //         isAuthenticated: false
+      //       }
+      //     });
+      //   }
+      // });
 
-      console.log("User signed out");
+      // // Upon log out, clear localStorage.
+      // localStorage.clear();
 
-      // After successful sign out, redirect user to the Sign In page.
-      navigate('/sign-in');
+      console.log("User logged out");
+
+      // After successful log out, redirect user to the Log In page.
+      navigate('/login');
     }
     catch(err) {
-      console.error("SIGN OUT ERROR:", err.message);
+      console.error("LOG OUT ERROR:", err.message);
     }
   }
 
@@ -62,8 +70,8 @@ const Navigation = (props) => {
               </Link>
             </li>
             <li>
-              <button className={styles.navButton} onClick={() => handleSignOut()}>
-                Sign Out
+              <button className={styles.navButton} onClick={() => handleLogOut()}>
+                Log Out
               </button>
             </li>
           </ul>

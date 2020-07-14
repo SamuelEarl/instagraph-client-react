@@ -1,36 +1,49 @@
 import React, { useState } from 'react';
 import { Link, navigate } from '@reach/router';
-import { useApolloClient, useMutation } from '@apollo/react-hooks';
-import { SIGN_IN } from '@/graphql/server/api';
+import { useApolloClient, useQuery } from '@apollo/react-hooks';
+import * as fb from '@/init-firebase.js';
+import { LOG_IN } from '@/graphql/server/api';
 import { v4 as uuidv4 } from 'uuid';
 import Button from '@/components/Button';
 // Styles are in the "AuthLayout.global.scss" file
 
-const SignInForm = (props) => {
+const LogInForm = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loadingMsg, setLoadingMsg] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
-  const [signIn, { loading, error }] = useMutation(SIGN_IN);
+  // const [logIn, { loading, error }] = useMutation(LOG_IN);
   const client = useApolloClient();
 
-  const handleSignIn = async (e) => {
+  const handleLogIn = async (e) => {
     try {
       e.preventDefault();
 
       setLoadingMsg("Loading...");
 
-      const user = await signIn({
+
+      const account = await fb.auth.signInWithEmailAndPassword(
+        email.trim(),
+        password.trim()
+      );
+
+      const { data } = useQuery(GET_USER, {
         variables: {
-          email: email.trim(),
-          password: password.trim(),
-          // TODO: The sessionId should be generated on the server. However, the @custom directive is not supported in the current version of Dgraph. When @custom is supported, then I will remove this sessionId in the client and implement it on the server where it should go. @custom should be supported in v20.07 - https://github.com/dgraph-io/dgraph/issues/5610.
-          sessionId: uuidv4(),
-        },
+          id: account.user.uid
+        }
       });
 
-      // If the user successfully signs in, then store the user object from the response in ApolloClient's cache.
-      console.log("SIGNED IN USER:", user);
+      // const user = await logIn({
+      //   variables: {
+      //     email: email.trim(),
+      //     password: password.trim(),
+      //     // TODO: The sessionId should be generated on the server. However, the @custom directive is not supported in the current version of Dgraph. When @custom is supported, then I will remove this sessionId in the client and implement it on the server where it should go. @custom should be supported in v20.07 - https://github.com/dgraph-io/dgraph/issues/5610.
+      //     sessionId: uuidv4(),
+      //   },
+      // });
+
+      // If the user successfully logs in, then store the user object from the response in ApolloClient's cache.
+      console.log("LOGGED IN USER:", data);
       if (user && user.data && user.data.updateUser && user.data.updateUser.user.length > 0) {
         const userObj = user.data.updateUser.user[0];
         localStorage.setItem("sessionId", userObj.sessionId);
@@ -54,7 +67,7 @@ const SignInForm = (props) => {
         setLoadingMsg('');
         setErrorMsg('');
 
-        // After successful sign in, redirect user to the "Dashboard" page.
+        // After successful log in, redirect user to the "Dashboard" page.
         navigate('/app/dashboard');
       }
       else if(error) {
@@ -72,12 +85,12 @@ const SignInForm = (props) => {
       else {
         setErrorMsg(err.message);
       }
-      console.error("SIGN IN ERROR:", err);
+      console.error("LOG IN ERROR:", err);
     }
   }
 
   return (
-    <form onSubmit={handleSignIn}>
+    <form onSubmit={handleLogIn}>
       <h1 className="authHeader">Welcome Back</h1>
 
       <input
@@ -94,11 +107,11 @@ const SignInForm = (props) => {
         onChange={e => setPassword(e.target.value)}
       />
 
-      {/* If a loading message exists, then show it to the user otherwise show the "Sign In" button */}
+      {/* If a loading message exists, then show it to the user otherwise show the "Log In" button */}
       {
         loadingMsg ?
         <div className="loadingMsg">{loadingMsg}</div> :
-        <Button size="fullWidth">Sign In</Button>
+        <Button size="fullWidth">Log In</Button>
       }
 
       <div className="switchForm">
@@ -112,4 +125,4 @@ const SignInForm = (props) => {
   );
 };
 
-export default SignInForm;
+export default LogInForm;

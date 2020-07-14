@@ -9,7 +9,7 @@ const PasswordResetSuccess = () => {
       <h1 className="authHeader">Email Sent</h1>
       <p className="authContent">Check your email for a link to reset your password.</p>
 
-      <Link to="/sign-in">Sign In</Link>
+      <Link to="/login">Log In</Link>
     </div>
   );
 };

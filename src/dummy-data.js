@@ -1,5 +1,5 @@
 /**
- * Once a user is signed in, they should see all posts from all users on their dashboard. You could
+ * Once a user is logged in, they should see all posts from all users on their dashboard. You could
  * implement pagination to show only a certain number of posts at a time, but I won't implement
  * pagination in this app.
  *
@@ -15,7 +15,7 @@ export const user = {
   lastName: "Clark",
   email: "ryan@example.com",
   password: "password123"
-}
+};
 
 // export const postsArray = [];
 export const postsArray = [

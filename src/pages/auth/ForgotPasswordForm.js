@@ -28,7 +28,7 @@ const ForgotPasswordForm = (props) => {
         <Button size="fullWidth">Submit</Button>
 
         <div className="switchForm">
-          <Link to="/sign-in">Sign In</Link>
+          <Link to="/login">Log In</Link>
         </div>
       </div>
     </form>

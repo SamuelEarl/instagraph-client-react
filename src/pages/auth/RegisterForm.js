@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link, navigate } from '@reach/router';
+import { auth } from '@/init-firebase';
 import { useMutation } from '@apollo/react-hooks';
-import { REGISTER } from '@/graphql/server/api';
+import { CREATE_USER } from '@/graphql/server/api';
 import Button from '@/components/Button';
 // Styles are in the "AuthLayout.global.scss" file
 
@@ -12,7 +13,7 @@ const RegisterForm = (props) => {
   const [password, setPassword] = useState('');
   const [loadingMsg, setLoadingMsg] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
-  const [register, { data, loading, error }] = useMutation(REGISTER);
+  const [createUser, { data, loading, error }] = useMutation(CREATE_USER);
 
   const handleRegister = async (e) => {
     try {
@@ -20,15 +21,23 @@ const RegisterForm = (props) => {
 
       setLoadingMsg("Loading...");
 
-      const user = await register({
+      const account = await auth.createUserWithEmailAndPassword(
+        email.trim(),
+        password.trim()
+      );
+      console.log("GOOGLE AUTH ACCOUNT:", account);
+
+      // Create a user node in Dgraph. `account.user.uid` is the user ID.
+      const user = await createUser({
         variables: {
-          // Comment one of these fields out to throw an error and test for errors.
+          // NOTE: You can comment one of these fields out to throw an error and test for errors.
+          id: account.user.uid,
           firstName: firstName.trim(),
           lastName: lastName.trim(),
           email: email.trim(),
-          password: password.trim(),
         }
       });
+
       // Reset the input fields back to their original values.
       setFirstName('');
       setLastName('');
@@ -43,8 +52,8 @@ const RegisterForm = (props) => {
       // I won't show how to do this in this tutorial, but you can try this on your own.
       // navigate('/verification-email-sent');
 
-      // Instead, after successful registration, redirect user to the Sign In page.
-      navigate('/sign-in');
+      // Instead, after successful registration, redirect user to the Log In page.
+      navigate('/login');
     }
     catch(err) {
       setLoadingMsg('');
@@ -101,7 +110,7 @@ const RegisterForm = (props) => {
       }
 
       <div className="switchForm">
-        <Link to="/sign-in">Sign In</Link>
+        <Link to="/login">Log In</Link>
       </div>
 
       {/* If an error message exists, then display it to the user. */}

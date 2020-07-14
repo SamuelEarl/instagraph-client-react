@@ -1,13 +1,13 @@
 import gql from 'graphql-tag';
 
-export const REGISTER = gql`
-  mutation Register($firstName: String!, $lastName: String!, $email: String!, $password: String!) {
+export const CREATE_USER = gql`
+  mutation CreateUser($userId: ID!, $firstName: String!, $lastName: String!, $email: String!) {
     addUser(input: [
       {
+        id: $userId
         firstName: $firstName
         lastName: $lastName
         email: $email
-        password: $password
       }
     ])
     {
@@ -22,50 +22,50 @@ export const REGISTER = gql`
 `;
 
 
-export const SIGN_IN = gql`
-  mutation SignIn($email: String!, $password: String!, $sessionId: String) {
-    updateUser(input: {
-      filter: {
-        email: { eq: $email }
-        password: { eq: $password }
-      },
-      set: {
-        sessionId: $sessionId
-      }
-    })
-    {
-      user {
-        id
-        firstName
-        lastName
-        email
-        sessionId
-      }
-    }
-  }
-`;
+// export const LOG_IN = gql`
+//   mutation LogIn($email: String!, $password: String!, $sessionId: String) {
+//     updateUser(input: {
+//       filter: {
+//         email: { eq: $email }
+//         password: { eq: $password }
+//       },
+//       set: {
+//         sessionId: $sessionId
+//       }
+//     })
+//     {
+//       user {
+//         id
+//         firstName
+//         lastName
+//         email
+//         sessionId
+//       }
+//     }
+//   }
+// `;
 
-export const SIGN_OUT = gql`
-  mutation SignOut($id: ID!) {
-    updateUser(input: {
-      filter: {
-        id: [$id]
-      },
-      set: {
-        sessionId: ""
-      }
-    })
-    {
-      user {
-        id
-        email
-      }
-    }
-  }
-`;
+// export const LOG_OUT = gql`
+//   mutation LogOut($id: ID!) {
+//     updateUser(input: {
+//       filter: {
+//         id: [$id]
+//       },
+//       set: {
+//         sessionId: ""
+//       }
+//     })
+//     {
+//       user {
+//         id
+//         email
+//       }
+//     }
+//   }
+// `;
 
 export const GET_USER = gql`
-  query GetUser($id: ID!) {
+  query GetUser($id: String!) {
     getUser(id: $id) {
       id
       firstName
@@ -75,16 +75,29 @@ export const GET_USER = gql`
   }
 `;
 
-export const GET_USER_BY_SESSION_ID = gql`
-  query GetUserBySessionID($sessionId: String!) {
-    getUser(sessionId: $sessionId) {
-      id
-      firstName
-      lastName
-      email
-    }
-  }
-`;
+// export const GET_USER_BY_USER_ID = gql`
+//   query GetUserByUserId($userId: String!) {
+//     getUser(userId: $userId) {
+//       id
+//       userId
+//       firstName
+//       lastName
+//       email
+//     }
+//   }
+// `;
+
+// // TODO: Delete this query because I will not be using it.
+// export const GET_USER_BY_SESSION_ID = gql`
+//   query GetUserBySessionID($sessionId: String!) {
+//     getUser(sessionId: $sessionId) {
+//       id
+//       firstName
+//       lastName
+//       email
+//     }
+//   }
+// `;
 
 export const GET_ALL_POSTS = gql`
   query GetAllPosts {
