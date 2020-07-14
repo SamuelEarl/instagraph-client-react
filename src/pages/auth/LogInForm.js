@@ -1,19 +1,20 @@
 import React, { useState } from 'react';
 import { Link, navigate } from '@reach/router';
-import { useApolloClient, useQuery } from '@apollo/react-hooks';
+import { useApolloClient, useMutation } from '@apollo/react-hooks';
 import * as fb from '@/init-firebase.js';
-import { LOG_IN } from '@/graphql/server/api';
-import { v4 as uuidv4 } from 'uuid';
+import { GET_USER } from '@/graphql/server/api';
 import Button from '@/components/Button';
 // Styles are in the "AuthLayout.global.scss" file
 
-const LogInForm = (props) => {
+
+const LogInForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loadingMsg, setLoadingMsg] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
-  // const [logIn, { loading, error }] = useMutation(LOG_IN);
   const client = useApolloClient();
+
+  const [getUser, { loading, data, error }] = useMutation(GET_USER);
 
   const handleLogIn = async (e) => {
     try {
@@ -21,32 +22,47 @@ const LogInForm = (props) => {
 
       setLoadingMsg("Loading...");
 
-
       const account = await fb.auth.signInWithEmailAndPassword(
         email.trim(),
         password.trim()
       );
+      console.log("LOGIN ACCOUNT:", account.user);
 
-      const { data } = useQuery(GET_USER, {
+      // Retrieve the user from Dgraph. `account.user.uid` is the user ID from Firebase Auth.
+      const user = await getUser({
         variables: {
-          id: account.user.uid
-        }
+          // NOTE: You can comment one of these fields out to throw an error and test for errors.
+          userId: account.user.uid,
+          email: account.user.email // TODO: Remove this after `useLazyQuery` gets fixed. Ugh. See my comment in the `client-react/src/graphql/server/api.js` file.
+        },
       });
+      console.log("LOGGED IN USER:", user);
 
-      // const user = await logIn({
+      // getUser({
       //   variables: {
-      //     email: email.trim(),
-      //     password: password.trim(),
-      //     // TODO: The sessionId should be generated on the server. However, the @custom directive is not supported in the current version of Dgraph. When @custom is supported, then I will remove this sessionId in the client and implement it on the server where it should go. @custom should be supported in v20.07 - https://github.com/dgraph-io/dgraph/issues/5610.
-      //     sessionId: uuidv4(),
+      //     // NOTE: You can comment one of these fields out to throw an error and test for errors.
+      //     userId: account.user.uid
       //   },
+      //   onCompleted(user) {
+      //     client.writeData({
+      //       data: {
+      //         user: user,
+      //         // user: {
+      //         //   userId: user.id,
+      //         //   firstName: user.firstName,
+      //         //   lastName: user.lastName,
+      //         //   email: user.email,
+      //         // },
+      //         isAuthenticated: true
+      //       }
+      //     });
+      //   }
       // });
+      // console.log("APOLLO CLIENT:", client);
 
       // If the user successfully logs in, then store the user object from the response in ApolloClient's cache.
-      console.log("LOGGED IN USER:", data);
       if (user && user.data && user.data.updateUser && user.data.updateUser.user.length > 0) {
         const userObj = user.data.updateUser.user[0];
-        localStorage.setItem("sessionId", userObj.sessionId);
         client.writeData({
           data: {
             user: userObj,
@@ -59,7 +75,7 @@ const LogInForm = (props) => {
             isAuthenticated: true
           }
         });
-        console.log("APOLLO CLIENT:", client);
+        console.log("APOLLO CACHE:", client.cache.data.data["$ROOT_QUERY.user"]);
 
         // Reset the input fields back to their original values.
         setEmail('');
@@ -70,24 +86,17 @@ const LogInForm = (props) => {
         // After successful log in, redirect user to the "Dashboard" page.
         navigate('/app/dashboard');
       }
-      else if(error) {
-        throw Error(error)
-      }
       else {
-        throw Error("No user exists with those credentials");
+        throw Error(error)
       }
     }
     catch(err) {
       setLoadingMsg('');
-      if (err.message === "GraphQL error: must be defined") {
-        setErrorMsg("All fields are required");
-      }
-      else {
-        setErrorMsg(err.message);
-      }
       console.error("LOG IN ERROR:", err);
+      setErrorMsg(err.message);
     }
   }
+
 
   return (
     <form onSubmit={handleLogIn}>

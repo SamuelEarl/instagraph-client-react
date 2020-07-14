@@ -21,8 +21,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
-    "typeface-open-sans": "0.0.75",
-    "uuid": "^8.1.0"
+    "typeface-open-sans": "0.0.75"
   },
   "devDependencies": {
     "craco-alias": "^2.1.1"

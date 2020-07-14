@@ -13,7 +13,7 @@ const RegisterForm = (props) => {
   const [password, setPassword] = useState('');
   const [loadingMsg, setLoadingMsg] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
-  const [createUser, { data, loading, error }] = useMutation(CREATE_USER);
+  const [createUser] = useMutation(CREATE_USER);
 
   const handleRegister = async (e) => {
     try {
@@ -27,16 +27,18 @@ const RegisterForm = (props) => {
       );
       console.log("GOOGLE AUTH ACCOUNT:", account);
 
-      // Create a user node in Dgraph. `account.user.uid` is the user ID.
+      // Create a user node in Dgraph. `account.user.uid` is the user ID from Firebase Auth.
       const user = await createUser({
         variables: {
           // NOTE: You can comment one of these fields out to throw an error and test for errors.
-          id: account.user.uid,
+          userId: account.user.uid,
           firstName: firstName.trim(),
           lastName: lastName.trim(),
           email: email.trim(),
         }
       });
+
+      // TODO: If there is an error creating the user in Dgraph, then delete the user in Firebase Auth.
 
       // Reset the input fields back to their original values.
       setFirstName('');
@@ -57,6 +59,7 @@ const RegisterForm = (props) => {
     }
     catch(err) {
       setLoadingMsg('');
+      console.error("REGISTRATION ERROR:", err.message);
       if (err.message === "GraphQL error: must be defined") {
         setErrorMsg("All fields are required");
       }
@@ -66,7 +69,6 @@ const RegisterForm = (props) => {
       else {
         setErrorMsg(err.message);
       }
-      console.error("REGISTRATION ERROR:", err.message);
     }
   }
 
@@ -110,7 +112,7 @@ const RegisterForm = (props) => {
       }
 
       <div className="switchForm">
-        <Link to="/login">Log In</Link>
+        <Link to="/login">Log Into Your Account</Link>
       </div>
 
       {/* If an error message exists, then display it to the user. */}

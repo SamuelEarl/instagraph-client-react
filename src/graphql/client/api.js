@@ -6,7 +6,7 @@ import gql from 'graphql-tag';
 export const GET_CURRENT_USER = gql`
   query GetCurrentUser {
     user @client {
-      id @client
+      userId @client
       firstName @client
       lastName @client
       email @client

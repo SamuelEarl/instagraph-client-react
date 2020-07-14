@@ -6,7 +6,6 @@ import React from 'react';
 import { Router, Redirect } from "@reach/router";
 import { useQuery } from '@apollo/react-hooks';
 
-import { GET_USER_BY_SESSION_ID } from '@/graphql/server/api';
 import { IS_AUTHENTICATED } from '@/graphql/client/api';
 
 import AuthLayout from '@/layouts/AuthLayout';

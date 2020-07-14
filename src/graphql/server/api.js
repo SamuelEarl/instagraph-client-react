@@ -1,18 +1,19 @@
 import gql from 'graphql-tag';
 
 export const CREATE_USER = gql`
-  mutation CreateUser($userId: ID!, $firstName: String!, $lastName: String!, $email: String!) {
+  mutation CreateUser($userId: String!, $firstName: String!, $lastName: String!, $email: String!) {
     addUser(input: [
       {
-        id: $userId
+        userId: $userId
         firstName: $firstName
         lastName: $lastName
         email: $email
+        # randomField: "randomValue"
       }
     ])
     {
       user {
-        id
+        userId
         firstName
         lastName
         email
@@ -20,6 +21,40 @@ export const CREATE_USER = gql`
     }
   }
 `;
+
+// `useLazyQuery` does not work as it should: https://github.com/apollographql/react-apollo/issues/3499.
+// Some people suggested using a mutation instead of query for things like querying a user or session token because mutations return promises. So I will use this mutation for now in place of the query that is listed after it until `useLazyQuery` works properly.
+export const GET_USER = gql`
+  mutation GetUser($userId: String!, $email: String!) {
+    updateUser(input: {
+      filter: {
+        userId: { eq: $userId }
+      },
+      set: {
+        email: $email
+      }
+    })
+    {
+      user {
+        userId
+        firstName
+        lastName
+        email
+      }
+    }
+  }
+`;
+// When `useLazyQuery` is fixed, then I will use this query instead of the one above. See my comment above.
+// export const GET_USER = gql`
+//   query GetUser($userId: String!) {
+//     getUser(userId: $userId) {
+//       userId
+//       firstName
+//       lastName
+//       email
+//     }
+//   }
+// `;
 
 
 // export const LOG_IN = gql`
@@ -64,16 +99,6 @@ export const CREATE_USER = gql`
 //   }
 // `;
 
-export const GET_USER = gql`
-  query GetUser($id: String!) {
-    getUser(id: $id) {
-      id
-      firstName
-      lastName
-      email
-    }
-  }
-`;
 
 // export const GET_USER_BY_USER_ID = gql`
 //   query GetUserByUserId($userId: String!) {
@@ -102,7 +127,7 @@ export const GET_USER = gql`
 export const GET_ALL_POSTS = gql`
   query GetAllPosts {
     queryPost {
-      id
+      userId
       user {
         firstName
         lastName
