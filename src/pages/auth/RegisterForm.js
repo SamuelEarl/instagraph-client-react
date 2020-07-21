@@ -112,7 +112,7 @@ const RegisterForm = (props) => {
       }
 
       <div className="switchForm">
-        <Link to="/login">Log Into Your Account</Link>
+        <Link to="/login">Back To Login</Link>
       </div>
 
       {/* If an error message exists, then display it to the user. */}
