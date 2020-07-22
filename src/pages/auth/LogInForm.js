@@ -86,9 +86,6 @@ const LogInForm = () => {
         // After successful log in, redirect user to the "Dashboard" page.
         navigate('/app/dashboard');
       }
-      else {
-        throw Error(error)
-      }
     }
     catch(err) {
       setLoadingMsg('');

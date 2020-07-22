@@ -1,0 +1,27 @@
+@import "@/assets/scss/variables.scss";
+
+@media #{$xs-up} {
+  .appLoading {
+    .text {
+      margin: 40px 0;
+      font-size: 2rem;
+      color: $medium;
+      text-align: center;
+    }
+
+    .spinner {
+      border: 10px solid $light-gray;
+      border-top: 10px solid $dark;
+      border-radius: 50%;
+      width: 70px;
+      height: 70px;
+      animation: spin 1.5s linear infinite;
+      margin: 0 auto;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  }
+}
